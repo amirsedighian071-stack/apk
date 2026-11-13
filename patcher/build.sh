@@ -111,6 +111,10 @@ echo "==> signing"
 echo "==> confirming alignment survived signing"
 python3 "$HERE/verify_apk.py" "$OUT_APK"
 
+# The full pipeline lives in rebuild.py, which also runs the two smali gates
+# (verify_smali.py, verify_types.py) before assembling.  Keep this script for
+# the toolchain-heavy route; prefer `python3 patcher/rebuild.py`.
+
 echo "==> verifying"
 "$JAVA" -jar "$APKSIGNER" verify --verbose "$OUT_APK" 2>&1 | grep -v WARNING | head -12
 ls -la "$OUT_APK"
