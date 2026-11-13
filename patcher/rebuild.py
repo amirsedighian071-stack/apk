@@ -91,23 +91,26 @@ def main():
     stage(4, "application-id consistency")
     run([sys.executable, os.path.join(HERE, "normalize_pkg.py"), dec])
 
-    stage(5, "control-flow check")
+    stage(5, "layout invariants")
+    run([sys.executable, os.path.join(HERE, "verify_layout.py"), dec])
+
+    stage(6, "control-flow check")
     run([sys.executable, os.path.join(HERE, "verify_smali.py"), dec])
 
-    stage(6, "Dalvik type check")
+    stage(7, "Dalvik type check")
     run([sys.executable, os.path.join(HERE, "verify_types.py"), dec])
 
-    stage(7, "assemble with apktool")
+    stage(8, "assemble with apktool")
     rebuilt = os.path.join(WORK, "rebuilt.apk")
     if os.path.exists(rebuilt):
         os.remove(rebuilt)
     run([JAVA, "-jar", APKTOOL, "b", dec, "-o", rebuilt], stdout=subprocess.DEVNULL)
 
-    stage(8, "align")
+    stage(9, "align")
     aligned = os.path.join(WORK, "aligned.apk")
     run([sys.executable, os.path.join(HERE, "zipalign.py"), rebuilt, aligned])
 
-    stage(9, "sign")
+    stage(10, "sign")
     if os.path.exists(args.out):
         os.remove(args.out)
     run([JAVA, "-jar", APKSIGNER, "sign", "--min-sdk-version", "21",
@@ -117,10 +120,10 @@ def main():
          "--v3-signing-enabled", "true", "--out", args.out, aligned],
         stderr=subprocess.DEVNULL)
 
-    stage(10, "verify the signed archive")
+    stage(11, "verify the signed archive")
     run([sys.executable, os.path.join(HERE, "verify_apk.py"), args.out])
 
-    stage(11, "verify signature")
+    stage(12, "verify signature")
     run([JAVA, "-jar", APKSIGNER, "verify", "--print-certs", args.out])
 
     # final sanity: the DEX that went in is byte-identical to the one in the zip

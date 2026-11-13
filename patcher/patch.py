@@ -27,6 +27,7 @@ NEW_APPID = "com.developeramira.remotemediastar"
 # "<appid>.starter" and "<appid>.main", while the classes still live under the
 # old package.  Both have to move together - see rename_package() below.
 TM = "%s/theme/ThemeManager" % NEW_APPID.replace(".", "/")
+MAIN_CLASS = "L%s/main;" % NEW_APPID.replace(".", "/")
 MAIN = "smali/%s/main.smali" % NEW_APPID.replace(".", "/")
 
 # ---------------------------------------------------------------------------
@@ -270,12 +271,18 @@ def route_colours(lines):
         scratch = regs.split(',')[0].strip()
         if not (scratch.startswith('v') or scratch.startswith('p')):
             raise RuntimeError("bad scratch register at #%d" % ordinal)
+        # sput/return round trip: the only register touched is the scratch
+        # that already held the red component, and the slot value reaches
+        # color() through a field, so no live register is overwritten.
         lines[idx] = (
             "%s# themed colour: %s\n"
             "%sconst/16 %s, 0x%02X\n"
-            "%sinvoke-static {%s}, L%s;->color(I)I" % (
+            "%ssput %s, %s->_paletteSlot:I\n"
+            "%sinvoke-static {}, L%s;->color()I\n"
+            "%smove-result %s" % (
                 indent, slot, indent, scratch, SLOT_INDEX[slot],
-                indent, scratch, TM))
+                indent, scratch, MAIN_CLASS,
+                indent, TM, indent, scratch))
         patched += 1
     log("routed %d colour call sites into the palette" % patched)
     return lines
@@ -285,8 +292,14 @@ def route_colours(lines):
 # 3. fields / helpers / callbacks
 # ---------------------------------------------------------------------------
 
-EXTRA_FIELDS = """
-# --- patched helpers ------------------------------------------------
+EXTRA_FIELDS = """# --- patched helpers ------------------------------------------------
+# Scratch slot used by the colour routing below.  The routing must not write
+# to any register the original code already holds a value in - those registers
+# are live across the call site and clobbering one corrupts unrelated drawing
+# state (this showed up on the device as labels drawn at the wrong offset).
+# A dedicated static field gives every routed call an input that no original
+# instruction can observe.
+.field public static _paletteSlot:I
 """
 
 
@@ -675,6 +688,24 @@ def patch_developer_button(lines):
 
     check-cast v6, Landroid/view/View;
 
+    # v16..v21 are (panel, view, left, top, width, height) for AddView.
+    # v18..v21 still hold the *previous* button's values here - the stock code
+    # only advances the vertical cursor v19 *after* its last AddView - so
+    # without this the developer button is placed at exactly the same top as
+    # the "buy dongle" button and the two are drawn on top of each other.
+    #
+    # v5 is the constant 0 from the top of this method and v21 the button
+    # height, so the two add-ints below are the same gap the stock code uses
+    # between the other buttons.  Advancing before the AddView also keeps the
+    # panel's scroll extent correct.
+    move/from16 v18, v5
+
+    move/from16 v20, v7
+
+    add-int v19, v19, v21
+
+    add-int v19, v19, v5
+
     move-object/from16 v16, v0
 
     move-object/from16 v17, v6
@@ -719,13 +750,6 @@ def patch_developer_button(lines):
     check-cast v9, Landroid/view/View;
 
     invoke-static {v9}, @@TM@@->attachDeveloperButton(Landroid/view/View;)V
-
-    add-int v6, v19, v21
-
-    # v1 is a String on every path here (last write is the "BuyDongleSettings"
-    # const-string above), so it cannot be used as an int gap.  v5 is the
-    # constant 0 written near the top of this method.
-    add-int v19, v6, v5
 
 """.replace("LABEL", DEV_LABEL)
     lines.insert(ret, block)
