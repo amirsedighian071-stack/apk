@@ -361,31 +361,108 @@ def add_callbacks(lines):
 
 
 def patch_theme_loader(lines):
-    """Replace the legacy theme.txt reader in _activity_create."""
+    """Point the legacy theme flag at the 7-theme engine.
+
+    The original Basic4Android code
+
+        If File.Exists(File.DirInternal, "theme.txt") Then
+            _vv1 = File.ReadString(File.DirInternal, "theme.txt").Equals("dark")
+        Else
+            _vv1 = False
+        End If
+
+    compiles to (blank lines elided):
+
+        invoke-static {}, File->getDirInternal()
+        move-result-object p0
+        const-string v0, "theme.txt"
+        invoke-static {p0, v0}, File->Exists(...)Z
+        move-result p0
+        const/4 v1, 0x0            <- the Else value, shared by _vv2 and _vv3
+        if-eqz p0, :cond_0
+        invoke-static {}, File->getDirInternal()
+        move-result-object p0
+        invoke-static {p0, v0}, File->ReadString(...)
+        move-result-object p0
+        const-string v0, "dark"
+        invoke-virtual {p0, v0}, String->equals(...)Z
+        move-result p0
+        sput-boolean p0, main->_vv1:Z
+        goto :goto_0
+        :cond_0
+        sput-boolean v1, main->_vv1:Z      <- reads the constant
+        :goto_0
+
+    The previous version of this function deleted everything from the
+    getDirInternal() call down to :cond_0, which also deleted `const/4 v1, 0x0`
+    while leaving the two `sput-boolean v1` instructions in place.  v1 then
+    still held the *string* "Txt" left over from the IR table built earlier in
+    the same method, so the verifier rejected `main` as a whole and the app
+    died on launch with a VerifyError.
+
+    Only the *read* is replaced.  The Exists() call, the `const/4`, the branch
+    and the Else write all stay exactly as b4a emitted them, so the method
+    remains type-correct.
+    """
     start, end = method_bounds(lines, "_activity_create(Z)")
-    cond0 = None
+
+    theme_at = None
     for k in range(start, end):
-        if lines[k].strip() == ":cond_0":
-            cond0 = k
+        if lines[k].strip() == 'const-string v0, "theme.txt"':
+            theme_at = k
             break
-    if cond0 is None:
-        raise RuntimeError(":cond_0 not found in _activity_create")
-    b = cond0
-    while "sput-boolean" not in lines[b]:
+    if theme_at is None:
+        raise RuntimeError('theme.txt read not found in _activity_create')
+
+    # the ReadString() call that produces the "dark"/"light" value
+    r = theme_at
+    while r < end and "ReadString" not in lines[r]:
+        r += 1
+    if r >= end:
+        raise RuntimeError("ReadString() for theme.txt not found")
+
+    # ... up to and including the write it feeds
+    b = r
+    while b < end and "sput-boolean" not in lines[b]:
         b += 1
-    a = cond0
-    guard = 0
-    while a > start and guard < 200:
-        if "getDirInternal" in lines[a] and "theme.txt" in "\n".join(lines[a:a + 12]):
-            break
-        a -= 1
+    if b >= end:
+        raise RuntimeError("the theme.txt assignment was not found")
+
+    removed = [l for l in lines[r:b + 1] if l.strip()]
+    if not any("ReadString" in l for l in removed):
+        raise RuntimeError("refusing to patch: span does not start at the theme read")
+    if any("sput-boolean v1" in l for l in removed):
+        raise RuntimeError("refusing to patch: the span contains the Else write")
+
+    # v0 is free here: the next instruction in the original is
+    # `const-string v0, "transmitter.txt"`, which overwrites it anyway.
+    lines[r:b + 1] = [
+        "    # patched: the 7-theme engine owns the legacy light/dark flag",
+        "    invoke-static {}, @@TM@@->isDark()Z",
+        "    move-result v0",
+        "    sput-boolean v0, Lcom/saminsoftware/remotemediastar/main;->_vv1:Z",
+    ]
+
+    # Boot the engine on the *unconditional* path.  Putting it inside the
+    # `if Exists(theme.txt)` branch would skip it on a fresh install, where
+    # mostCurrent is already assigned but no theme has ever been saved.
+    guard = theme_at
+    while guard < end and lines[guard].strip() != "const/4 v1, 0x0":
         guard += 1
-    # a is the first instruction of the theme.txt block; b is its last one
-    lines[a:b + 1] = [
-        "    # patched: the 7-theme engine replaces the legacy light/dark flag",
+    if guard >= end:
+        raise RuntimeError("could not find the shared Else constant")
+    lines[guard:guard] = [
+        "    # patched: boot the theme engine (mostCurrent is set by now)",
         "    invoke-static {}, @@TM@@->install()V",
     ]
-    log("theme bootstrap rewritten in _activity_create")
+
+    # the shared Else constant must survive, or :cond_0 writes a stale register
+    body = "\n".join(lines[start:end])
+    if "sput-boolean v1, Lcom/saminsoftware/remotemediastar/main;->_vv1:Z" in body:
+        if "const/4 v1, 0x0" not in body:
+            raise RuntimeError("const/4 v1, 0x0 is gone but the Else branch still reads v1")
+
+    log("theme bootstrap rewired in _activity_create (%d instructions replaced)" % len(removed))
     return lines
 
 

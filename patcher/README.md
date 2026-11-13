@@ -187,6 +187,89 @@ which apktool reported as a package rename. Both now carry
 `com.developeramira.remotemediastar`, and `androidsupportmultidexversion.txt`
 was restored.
 
+## Fix: the app closed immediately on launch (15.0.1 build 2)
+
+**Symptom.** After the alignment fix the APK installed fine, but tapping the
+icon produced *"MediaStar Remote Dev keeps stopping"* on a Xiaomi/MIUI device.
+
+**Root cause.** A `VerifyError` in `main`, caused by the patcher itself.
+
+The original b4a code that reads the legacy light/dark flag compiles to this
+(blank lines elided):
+
+```
+invoke-static {}, File->getDirInternal()
+move-result-object p0
+const-string v0, "theme.txt"
+invoke-static {p0, v0}, File->Exists(...)Z
+move-result p0
+const/4 v1, 0x0            <- the Else value
+if-eqz p0, :cond_0
+   ... ReadString / equals / sput-boolean p0, _vv1 ...
+   goto :goto_0
+:cond_0
+sput-boolean v1, _vv1:Z    <- reads the constant
+:goto_0
+```
+
+The old `patch_theme_loader()` replaced everything from the `getDirInternal()`
+call down to `:cond_0` with a single `ThemeManager->install()`. That span
+contained `const/4 v1, 0x0`, but **not** the two `sput-boolean v1` writes it
+feeds, which are still live further down the method. So `v1` kept whatever it
+held from earlier in `_activity_create` — the *string* `"Txt"` from the IR
+code table — and the verifier saw a String written into a boolean field at a
+branch merge point.
+
+A `VerifyError` rejects the **whole class**, not just the method, so every
+entry point into `main` died and Android reported a crash on launch.
+
+The lesson that matters: this is invisible to smali assembly. `apktool b`
+printed no warning, the DEX parsed cleanly, every method decoded, and the
+class/method inventory was identical. Only a type-aware dataflow over the
+control-flow graph catches it.
+
+**Fix.** `patch_theme_loader()` now replaces only the *read*:
+
+```
+invoke-static {}, ThemeManager->isDark()Z
+move-result v0
+sput-boolean v0, _vv1:Z
+```
+
+The `Exists()` call, the `const/4 v1, 0x0`, the branch and the Else write are
+all left exactly as b4a emitted them, so the method stays type-correct. The
+`ThemeManager->install()` boot call moved to the unconditional path just
+before the branch — inside the `if` it would be skipped on a fresh install,
+where `mostCurrent` is already assigned but no theme has ever been saved.
+
+**Guard.** Two new gates run before assembly, and a third after signing:
+
+| script | what it proves |
+|---|---|
+| `patcher/verify_smali.py` | no branch to a label that does not exist; no register read before any write |
+| `patcher/verify_types.py` | forward Dalvik type dataflow over the CFG — int / wide / float / double / obj / null, merged at every join point; catches a register holding the wrong type at an `sput`, `iput` or call argument |
+| `patcher/verify_apk.py` | `resources.arsc` is STORED and 4-byte aligned in the **signed** file |
+
+`verify_types.py` is calibrated to report nothing on the pristine 15.0.0 tree
+and reports exactly the defect above on the broken build:
+
+```
+$ python3 patcher/verify_types.py build/dec            # pristine original
+OK: no type violations
+
+$ python3 patcher/verify_types.py /tmp/broken           # the 15.0.1 build
+main.smali:895: sput-boolean v1, main->_vv2:Z
+    writes a obj value into a int slot (register v1 holds obj)
+FAILED: 3 type violation(s) - Android would reject these classes
+```
+
+`patcher/rebuild.py` runs the whole pipeline and refuses to sign if either
+gate fails. It also verifies that `classes.dex` is byte-identical before and
+after alignment and signing.
+
+The prebuilt engine smali is now in the repository under
+`patcher/smali/theme/`, so a rebuild needs no javac, no d8 and no Android SDK.
+
 ### About the antivirus warning
 
 Nothing in the app triggers a detection heuristically — the DEX contains no

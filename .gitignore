@@ -11,3 +11,6 @@ tools/*.jar
 *.jks
 *.keystore
 !patcher/tools/release.jks
+
+# rebuild workspace (python3 patcher/rebuild.py)
+build/
