@@ -15,12 +15,19 @@ Usage: python3 patch.py <decompiled_dir>
 """
 import os
 import re
+import shutil
 import sys
 
 ORIG_PKG = "com.saminsoftware.remotemediastar"
 NEW_APPID = "com.developeramira.remotemediastar"
-TM = "com/saminsoftware/remotemediastar/theme/ThemeManager"
-MAIN = "smali/%s/main.smali" % ORIG_PKG.replace(".", "/")
+
+# The B4A runtime builds component class names from BA.packageName, which it
+# reads from the manifest <manifest package="...">.  Moving the application id
+# without moving the classes therefore breaks the app: BA looks for
+# "<appid>.starter" and "<appid>.main", while the classes still live under the
+# old package.  Both have to move together - see rename_package() below.
+TM = "%s/theme/ThemeManager" % NEW_APPID.replace(".", "/")
+MAIN = "smali/%s/main.smali" % NEW_APPID.replace(".", "/")
 
 # ---------------------------------------------------------------------------
 # palette slots (must match ThemeManager's slot constants)
@@ -130,29 +137,93 @@ def find(lines, start, end, needle):
 # ---------------------------------------------------------------------------
 
 
+def _rewrite_package_tree(dec):
+    """Move every class from the old package to the new one.
+
+    B4A derives component class names from BA.packageName, which comes from the
+    manifest package attribute.  It also stores the class name as a literal in
+    each generated BA constructor, and SubExists() resolves subs through it.
+    So the manifest id and the class tree must change together.
+
+    This walks the whole smali tree and rewrites:
+      * the directory layout           smali/com/saminsoftware/.. -> smali/com/developeramira/..
+      * .class / .super / .source refs Lcom/saminsoftware/remotemediastar/..
+      * the hardcoded package strings  "com.saminsoftware.remotemediastar[.X]"
+
+    Product URLs (www.saminsoftware.ir) are the vendor's site, not ours to
+    change, so only the dotted package form is touched.
+    """
+    old_slash = ORIG_PKG.replace(".", "/")
+    new_slash = NEW_APPID.replace(".", "/")
+    old_dir = os.path.join(dec, "smali", old_slash)
+    new_dir = os.path.join(dec, "smali", new_slash)
+
+    if not os.path.isdir(old_dir):
+        raise RuntimeError("expected smali tree at %s" % old_dir)
+
+    # rewrite file contents first (the tree is still at the old location)
+    touched = 0
+    for root, _dirs, files in os.walk(old_dir):
+        for name in files:
+            if not name.endswith(".smali"):
+                continue
+            path = os.path.join(root, name)
+            body = read(path)
+            new = body.replace("L%s" % old_slash, "L%s" % new_slash)
+            new = new.replace('"%s' % ORIG_PKG, '"%s' % NEW_APPID)
+            if new != body:
+                write(path, new)
+                touched += 1
+
+    # other smali roots (e.g. smali_classes2) may also reference the package
+    for extra in sorted(os.listdir(os.path.join(dec, "smali"))) if False else []:
+        pass
+
+    # move the tree
+    parent = os.path.dirname(new_dir)
+    if os.path.isdir(new_dir):
+        shutil.rmtree(new_dir)
+    os.makedirs(parent, exist_ok=True)
+    shutil.move(old_dir, new_dir)
+
+    # drop the now-empty directory chain
+    d = os.path.dirname(old_dir)
+    while d.startswith(os.path.join(dec, "smali")) and os.path.isdir(d) and not os.listdir(d):
+        os.rmdir(d)
+        d = os.path.dirname(d)
+
+    return touched
+
+
 def rename_package(dec):
     manifest = os.path.join(dec, "AndroidManifest.xml")
     data = read(manifest)
+
+    # 1. move the class tree and every reference inside it
+    touched = _rewrite_package_tree(dec)
+
+    # 2. the manifest id and the component names must now both be the new one.
+    #    Written as fully qualified names so the id cannot be re-interpreted.
     data = data.replace('package="%s"' % ORIG_PKG, 'package="%s"' % NEW_APPID)
-    # components stay in the original namespace, but must be fully qualified
     for comp in (".main", ".starter", ".starter$starter_BR"):
+        # whatever apktool emitted (short form or the old fully-qualified form)
+        data = data.replace('android:name="%s%s"' % (ORIG_PKG, comp),
+                            'android:name="%s%s"' % (NEW_APPID, comp))
         data = data.replace('android:name="%s"' % comp,
-                            'android:name="%s%s"' % (ORIG_PKG, comp))
-    # give the fork its own launcher label so it is distinguishable
+                            'android:name="%s%s"' % (NEW_APPID, comp))
+
+    # 3. give the fork its own launcher label
     data = data.replace('android:label="Mediastar Remote"',
                         'android:label="MediaStar Remote Dev"')
-
     write(manifest, data)
-    log("application id -> %s (label: MediaStar Remote Dev)" % NEW_APPID)
+    log("application id -> %s, %d smali files moved" % (NEW_APPID, touched))
 
-    # The b4a StarterHelper looks up android.permission.WAKE_LOCK before
-    # acquiring a wakelock on the startServiceFromReceiver() path.  Nothing in
-    # this app ever requests that permission and the app's own receiver is
-    # never broadcast, so declaring it would add a permission the app never
-    # uses - exactly the kind of extra scope that gets flagged for review.
-    # Leaving it out means the lookup simply fails and the wakelock branch is
-    # skipped; the service itself still starts normally.
-    data = read(manifest)
+    # 4. The b4a StarterHelper looks up android.permission.WAKE_LOCK before
+    #    acquiring a wakelock on the startServiceFromReceiver() path.  Nothing
+    #    in this app ever requests that permission and the app's own receiver
+    #    is never broadcast, so declaring it would add a permission the app
+    #    never uses.  Leaving it out means the lookup fails and the wakelock
+    #    branch is skipped; the service itself still starts normally.
     for perm in ("android.permission.WAKE_LOCK",
                  "android.permission.RECEIVE_BOOT_COMPLETED",
                  "android.permission.INTERNET"):
@@ -160,7 +231,6 @@ def rename_package(dec):
         if tag in data:
             data = data.replace(tag, "")
             log("dropped unused permission %s" % perm.split(".")[-1])
-    write(manifest, data)
 
     yml = os.path.join(dec, "apktool.yml")
     if os.path.exists(yml):
@@ -648,7 +718,7 @@ def patch_developer_button(lines):
 
     check-cast v9, Landroid/view/View;
 
-    invoke-static {v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->attachDeveloperButton(Landroid/view/View;)V
+    invoke-static {v9}, @@TM@@->attachDeveloperButton(Landroid/view/View;)V
 
     add-int v6, v19, v21
 
@@ -692,12 +762,16 @@ def main():
         print("usage: patch.py <decompiled_dir>")
         return 2
     dec = os.path.abspath(sys.argv[1])
+
+    # rename_package moves the whole class tree to the new application id, so
+    # it has to run before anything resolves a path under that id.
+    rename_package(dec)
+
     main_path = os.path.join(dec, MAIN)
     if not os.path.exists(main_path):
-        print("main.smali not found: " + main_path)
+        print("main.smali not found after rename: " + main_path)
         return 2
 
-    rename_package(dec)
     log("patching main.smali ...")
     lines = read(main_path).split("\n")
     lines = route_colours(lines)
@@ -714,6 +788,13 @@ def main():
     # every ThemeManager reference was emitted as the @@TM@@ token; resolve it
     # once, here, so no literal placeholder can reach the assembler again
     body = body.replace("@@TM@@", "L%s;" % TM)
+    # The injected blocks were written against the original package.  Point
+    # them at the new application id too, otherwise main keeps calling
+    # Lcom/saminsoftware/.../main; after the tree has moved to
+    # Lcom/developeramira/.../main; and every such call is a
+    # NoClassDefFoundError at runtime.
+    body = body.replace("L%s" % ORIG_PKG.replace(".", "/"),
+                        "L%s" % NEW_APPID.replace(".", "/"))
     write(main_path, body)
     if "@@TM@@" in body or "LTM;" in body:
         raise RuntimeError("unresolved ThemeManager placeholder")

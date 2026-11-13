@@ -1,4 +1,4 @@
-.class final Lcom/saminsoftware/remotemediastar/theme/ThemeManager$3;
+.class final Lcom/developeramira/remotemediastar/theme/ThemeManager$3;
 .super Ljava/lang/Object;
 .source "ThemeManager.java"
 
@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->attachPressFeedback(Landroid/view/View;)V
+    value = Lcom/developeramira/remotemediastar/theme/ThemeManager;->attachPressFeedback(Landroid/view/View;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;

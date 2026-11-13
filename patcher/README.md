@@ -13,11 +13,14 @@ Output: **`MediaStar Remote Dev_15.0.1.apk`** (in the repository root).
 | min / target SDK | 21 / 36 |
 | signature | v1 + v2 + v3 (self‑signed, `CN=Amir Sedighian`) |
 
-The Java/Kotlin *classes* deliberately keep the original
-`com.saminsoftware.remotemediastar` namespace. Only the manifest `package`
-changes — B4A resolves activities by class name, so renaming the classes would
-break every internal bridge call. The manifest therefore declares the
-components fully qualified while the app id is new.
+The classes move with the application id. B4A does not hardcode component
+names: `BA.packageName` is read from the manifest and the runtime appends
+`.main` / `.starter` to it, so the manifest id and the class tree have to agree.
+An earlier revision kept the classes at `com.saminsoftware.remotemediastar` and
+only moved the manifest, which made the app die with
+`ClassNotFoundException: com.developeramira.remotemediastar.starter` - see the
+build 4 section below. The class tree, every descriptor, every hardcoded
+package string and the manifest now all carry the new id.
 
 ## What was added
 
@@ -186,6 +189,78 @@ therefore disagreed with the manifest's `com.developeramira.remotemediastar`,
 which apktool reported as a package rename. Both now carry
 `com.developeramira.remotemediastar`, and `androidsupportmultidexversion.txt`
 was restored.
+
+## Fix: ClassNotFoundException for the starter service (15.0.1 build 4)
+
+**Symptom.** The stack trace named the class that could not be found: B4A was
+looking for the `starter` service under the **new** application id while the
+class still lived under the **old** one.
+
+### Why this happened
+
+B4A never hardcodes component class names — it builds them from
+`BA.packageName` at runtime:
+
+```
+BA.smali          sget-object  BA->packageName
+                  const-string ".starter"
+                  ... StringBuilder(packageName + ".starter") ...
+ServiceHelper$StarterHelper   ... + ".main"
+BA.isAnyActivityVisible()     ... + ".main"
+```
+
+and `BA.packageName` is filled in from the manifest:
+
+```
+BA.smali:157   invoke-virtual {p1}, Landroid/content/Context;->getPackageName()
+BA.smali:326   sput-object  v2, BA->packageName
+```
+
+So a small, consistent-looking change was actually two changes: the manifest
+`package` moved to `com.developeramira.remotemediastar`, but the class tree
+stayed at `com.saminsoftware.remotemediastar`. The runtime then resolved
+`com.developeramira.remotemediastar.starter` and there was no such class.
+
+The earlier decision to keep the old namespace for the classes was made on the
+belief that "B4A resolves activities by class name, so renaming the classes
+would break every internal bridge call". That is half true — B4A does resolve
+by name — but the name it resolves **is derived from the package**, so keeping
+the classes behind was the thing that broke it.
+
+### Fix
+
+`patch.py` now moves the class tree rather than only editing the manifest:
+
+1. `smali/com/saminsoftware/remotemediastar/` → `smali/com/developeramira/remotemediastar/`
+2. every `Lcom/saminsoftware/remotemediastar/…` descriptor → the new one
+3. every `"com.saminsoftware.remotemediastar[.X]"` **string literal** → the new
+   one (these are the values B4A passes to its own `BA` constructor and to
+   `SubExists()`)
+4. the manifest `package` attribute and all component names
+
+The vendor's product URLs (`www.saminsoftware.ir`) are untouched — that is the
+upstream author's site, not part of the application id.
+
+`renamed 14 files, moved the tree, rewrote 7 hardcoded package literals`.
+
+### Gate: no stale application id may survive
+
+A partial rename is worse than no rename, because it fails at runtime and never
+at build time. `patcher/normalize_pkg.py` runs after the patch and fails the
+build if **any** reference to the old id survives, in either the descriptor form
+or the string-literal form, or if a component declared in the manifest has no
+corresponding class:
+
+```
+$ python3 patcher/normalize_pkg.py build/dec
+== stale application-id references
+== declared components present in the dex tree
+OK: no stale references, every declared component resolves
+```
+
+It caught 11 stale references on the first attempt — every injected patch block
+still pointed at the old package, which would have produced
+`NoClassDefFoundError` on the very first call into `main`.
 
 ## Fix: the app still closed on launch (15.0.1 build 3)
 

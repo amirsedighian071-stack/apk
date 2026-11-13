@@ -1,4 +1,4 @@
-.class public final Lcom/saminsoftware/remotemediastar/theme/ThemeManager;
+.class public final Lcom/developeramira/remotemediastar/theme/ThemeManager;
 .super Ljava/lang/Object;
 .source "ThemeManager.java"
 
@@ -118,7 +118,7 @@
 
     move-result-object v0
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
     .line 60
     const-string v1, "\u062a\u0645 \u0631\u0648\u0634\u0646 \u2013 \u0644\u0648\u062a\u0648\u0633"
@@ -139,7 +139,7 @@
 
     move-result-object v0
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
 
     .line 71
     const-string v1, "\u0631\u0648\u0634\u0646\u060c \u06af\u0631\u0645 \u0648 \u062e\u0648\u0627\u0646\u0627"
@@ -160,7 +160,7 @@
 
     move-result-object v0
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_TAGS:[Ljava/lang/String;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_TAGS:[Ljava/lang/String;
 
     .line 101
     const/4 v0, 0x7
@@ -225,18 +225,18 @@
 
     aput-object v1, v0, v4
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->PALETTES:[[I
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->PALETTES:[[I
 
     .line 132
-    sput-object v2, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sput-object v2, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     .line 133
     const-string v0, "light"
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
 
     .line 134
-    sput-boolean v3, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loaded:Z
+    sput-boolean v3, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loaded:Z
 
     .line 135
     new-instance v0, Landroid/os/Handler;
@@ -247,18 +247,18 @@
 
     invoke-direct {v0, v1}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
 
     .line 571
-    sput v5, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->effect:I
+    sput v5, Lcom/developeramira/remotemediastar/theme/ThemeManager;->effect:I
 
     .line 784
     const/4 v0, 0x0
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
 
     .line 1066
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
     return-void
 
@@ -426,7 +426,7 @@
     .line 317
     const/16 v0, 0x9
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -437,7 +437,7 @@
     .locals 0
 
     .line 50
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
 
     return-void
 .end method
@@ -446,7 +446,7 @@
     .locals 1
 
     .line 50
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
 
     return-object v0
 .end method
@@ -455,7 +455,7 @@
     .locals 1
 
     .line 50
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object v0
 
@@ -467,7 +467,7 @@
 
     .line 142
     :try_start_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/main;->mostCurrent:Lcom/saminsoftware/remotemediastar/main;
+    sget-object v0, Lcom/developeramira/remotemediastar/main;->mostCurrent:Lcom/developeramira/remotemediastar/main;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -503,7 +503,7 @@
 
     .line 658
     :try_start_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
 
     move-result-object v0
 
@@ -523,7 +523,7 @@
 
     .line 660
     :goto_0
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateHero(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateHero(Landroid/view/View;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -698,7 +698,7 @@
     invoke-virtual {v2, v4}, Landroid/view/animation/AnimationSet;->addAnimation(Landroid/view/animation/Animation;)V
 
     .line 598
-    sget v4, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->effect:I
+    sget v4, Lcom/developeramira/remotemediastar/theme/ThemeManager;->effect:I
 
     const/4 v5, 0x2
 
@@ -1033,13 +1033,13 @@
     invoke-virtual {v2, v3}, Landroid/view/View;->setAlpha(F)V
 
     .line 699
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object v3
 
     const/16 v4, 0x10
 
-    invoke-static {v3, v4}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v3, v4}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v3
 
@@ -1048,11 +1048,11 @@
     invoke-virtual {v2, v3}, Landroid/view/View;->setTranslationY(F)V
 
     .line 700
-    sget-object v3, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
+    sget-object v3, Lcom/developeramira/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
 
-    new-instance v4, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$2;
+    new-instance v4, Lcom/developeramira/remotemediastar/theme/ThemeManager$2;
 
-    invoke-direct {v4, v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$2;-><init>(Landroid/view/View;)V
+    invoke-direct {v4, v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager$2;-><init>(Landroid/view/View;)V
 
     rem-int/lit8 v2, v1, 0x12
 
@@ -1090,17 +1090,17 @@
 
     .line 484
     :try_start_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
 
     .line 485
     const/4 v0, 0x0
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
     .line 486
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
 
     move-result-object v1
 
@@ -1108,11 +1108,11 @@
     if-eqz v1, :cond_0
 
     .line 488
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->applyToWindow(Landroid/app/Activity;)V
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->applyToWindow(Landroid/app/Activity;)V
 
     .line 490
     :cond_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/main;->_vv5()Ljava/lang/String;
+    invoke-static {}, Lcom/developeramira/remotemediastar/main;->_vv5()Ljava/lang/String;
 
     .line 491
     if-nez v1, :cond_1
@@ -1128,7 +1128,7 @@
 
     .line 492
     :goto_0
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateHero(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateHero(Landroid/view/View;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -1142,7 +1142,7 @@
     .line 494
     const-string v0, "\u062a\u0645 \u0627\u0639\u0645\u0627\u0644 \u0634\u062f"
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
 
     .line 496
     :goto_1
@@ -1166,7 +1166,7 @@
 
     .line 460
     :cond_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->pageGradient()Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->pageGradient()Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object v0
 
@@ -1183,7 +1183,7 @@
     .line 463
     const/4 v0, 0x0
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -1192,7 +1192,7 @@
     .line 464
     const/4 v0, 0x2
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -1209,7 +1209,7 @@
     move-result v0
 
     .line 467
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->isDark()Z
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->isDark()Z
 
     move-result v1
 
@@ -1254,9 +1254,9 @@
     .line 744
     :cond_0
     :try_start_0
-    new-instance v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$3;
+    new-instance v0, Lcom/developeramira/remotemediastar/theme/ThemeManager$3;
 
-    invoke-direct {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$3;-><init>()V
+    invoke-direct {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$3;-><init>()V
 
     invoke-virtual {p0, v0}, Landroid/view/View;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V
     :try_end_0
@@ -1341,19 +1341,19 @@
     .line 367
     float-to-int p1, v0
 
-    invoke-static {p1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->clamp(I)I
+    invoke-static {p1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->clamp(I)I
 
     move-result p1
 
     float-to-int p2, v2
 
-    invoke-static {p2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->clamp(I)I
+    invoke-static {p2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->clamp(I)I
 
     move-result p2
 
     float-to-int p0, p0
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->clamp(I)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->clamp(I)I
 
     move-result p0
 
@@ -1373,7 +1373,7 @@
     invoke-direct {v0, p0}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
 
     .line 827
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->pageGradient()Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->pageGradient()Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object v1
 
@@ -1415,20 +1415,20 @@
     .line 838
     const/16 v5, 0x16
 
-    invoke-static {p0, v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v6
 
     .line 839
     const/16 v7, 0x22
 
-    invoke-static {p0, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v7
 
     const/16 v8, 0x1e
 
-    invoke-static {p0, v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v8
 
@@ -1462,13 +1462,13 @@
     .line 846
     const/16 v10, 0x9
 
-    invoke-static {v10}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v10}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v11
 
     const/16 v12, 0xa
 
-    invoke-static {v12}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v12}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v13
 
@@ -1487,7 +1487,7 @@
     .line 849
     const/16 v8, 0x68
 
-    invoke-static {p0, v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v8
 
@@ -1499,7 +1499,7 @@
     .line 851
     const/16 v8, 0x10
 
-    invoke-static {p0, v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v8
 
@@ -1521,7 +1521,7 @@
     .line 856
     const/16 v8, 0xc
 
-    invoke-static {v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v9
 
@@ -1554,7 +1554,7 @@
     invoke-virtual {v6, v9}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 865
-    invoke-static {v10}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v10}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v9
 
@@ -1578,7 +1578,7 @@
     .line 870
     const/4 v13, 0x4
 
-    invoke-static {p0, v13}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v13}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v13
 
@@ -1587,7 +1587,7 @@
     .line 871
     const/16 v13, 0x14
 
-    invoke-static {p0, v13}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v13}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v13
 
@@ -1607,23 +1607,23 @@
     .line 876
     const/4 v1, 0x7
 
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v1
 
     const/16 v9, 0x8
 
-    invoke-static {v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v9}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v9
 
     const/16 v13, 0xcc
 
-    invoke-static {v9, v13}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->alpha(II)I
+    invoke-static {v9, v13}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->alpha(II)I
 
     move-result v9
 
-    invoke-static {v1, v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->card(II)Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {v1, v9}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->card(II)Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object v1
 
@@ -1632,7 +1632,7 @@
     .line 877
     const/16 v1, 0x12
 
-    invoke-static {p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v1
 
@@ -1650,7 +1650,7 @@
     invoke-virtual {v1, v9}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 881
-    invoke-static {v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v9
 
@@ -1664,7 +1664,7 @@
     .line 883
     const/4 v13, 0x3
 
-    invoke-static {p0, v13}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v13}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v13
 
@@ -1688,7 +1688,7 @@
     .line 888
     const/16 v13, 0x18
 
-    invoke-static {p0, v13}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v13}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v13
 
@@ -1708,7 +1708,7 @@
     invoke-virtual {v1, v6}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 894
-    invoke-static {v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v6
 
@@ -1733,7 +1733,7 @@
     invoke-direct {v6, v4, v11}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
 
     .line 900
-    invoke-static {p0, v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v8
 
@@ -1751,7 +1751,7 @@
 
     const-string v13, "\u0627\u06cc\u0646\u0633\u062a\u0627\u06af\u0631\u0627\u0645"
 
-    invoke-static {p0, v8, v13, v1, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->socialRow(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/view/View;
+    invoke-static {p0, v8, v13, v1, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->socialRow(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/view/View;
 
     move-result-object v1
 
@@ -1766,7 +1766,7 @@
 
     const-string v13, "\u062a\u0644\u06af\u0631\u0627\u0645"
 
-    invoke-static {p0, v8, v13, v1, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->socialRow(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/view/View;
+    invoke-static {p0, v8, v13, v1, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->socialRow(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/view/View;
 
     move-result-object v1
 
@@ -1781,7 +1781,7 @@
 
     const-string v13, "\u06af\u06cc\u062a\u200c\u0647\u0627\u0628"
 
-    invoke-static {p0, v8, v13, v1, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->socialRow(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/view/View;
+    invoke-static {p0, v8, v13, v1, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->socialRow(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Landroid/view/View;
 
     move-result-object v1
 
@@ -1800,7 +1800,7 @@
     .line 916
     const/16 v6, 0xd
 
-    invoke-static {v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v6
 
@@ -1820,14 +1820,14 @@
     invoke-direct {v6, v4, v11}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
 
     .line 921
-    invoke-static {p0, v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v5
 
     iput v5, v6, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
     .line 922
-    invoke-static {p0, v12}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v12}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v5
 
@@ -1849,7 +1849,7 @@
     .line 927
     const/16 v5, 0xe
 
-    invoke-static {v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v6
 
@@ -1867,11 +1867,11 @@
     invoke-virtual {v1, v7}, Landroid/widget/TextView;->setGravity(I)V
 
     .line 931
-    invoke-static {p0, v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v6
 
-    invoke-static {p0, v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v7
 
@@ -1885,11 +1885,11 @@
     sget-object v7, Landroid/graphics/drawable/GradientDrawable$Orientation;->LEFT_RIGHT:Landroid/graphics/drawable/GradientDrawable$Orientation;
 
     .line 933
-    invoke-static {v10}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v10}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v8
 
-    invoke-static {v12}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v12}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v9
 
@@ -1900,7 +1900,7 @@
     invoke-direct {v6, v7, v8}, Landroid/graphics/drawable/GradientDrawable;-><init>(Landroid/graphics/drawable/GradientDrawable$Orientation;[I)V
 
     .line 934
-    invoke-static {p0, v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result p0
 
@@ -1912,9 +1912,9 @@
     invoke-virtual {v1, v6}, Landroid/widget/TextView;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
     .line 936
-    new-instance p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$5;
+    new-instance p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$5;
 
-    invoke-direct {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$5;-><init>()V
+    invoke-direct {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$5;-><init>()V
 
     invoke-virtual {v1, p0}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -1945,7 +1945,7 @@
     invoke-direct {v0, p0}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
 
     .line 1109
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->pageGradient()Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->pageGradient()Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object v1
 
@@ -1981,20 +1981,20 @@
     .line 1118
     const/16 v1, 0x12
 
-    invoke-static {p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v5
 
     .line 1119
     const/16 v6, 0x1c
 
-    invoke-static {p0, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v6
 
     const/16 v7, 0x18
 
-    invoke-static {p0, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v7
 
@@ -2013,7 +2013,7 @@
     .line 1123
     const/16 v6, 0xc
 
-    invoke-static {v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v6
 
@@ -2050,7 +2050,7 @@
     .line 1134
     const/16 v7, 0xd
 
-    invoke-static {v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v7
 
@@ -2074,14 +2074,14 @@
     .line 1139
     const/4 v9, 0x6
 
-    invoke-static {p0, v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v9}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v9
 
     iput v9, v7, Landroid/widget/LinearLayout$LayoutParams;->topMargin:I
 
     .line 1140
-    invoke-static {p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v1
 
@@ -2091,7 +2091,7 @@
     invoke-virtual {v3, v5, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
     .line 1143
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->getTheme()Ljava/lang/String;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->getTheme()Ljava/lang/String;
 
     move-result-object v1
 
@@ -2101,7 +2101,7 @@
     const/4 v7, 0x0
 
     :goto_0
-    sget-object v9, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v9, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
     array-length v10, v9
 
@@ -2114,7 +2114,7 @@
 
     move-result v9
 
-    invoke-static {p0, v7, v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeCard(Landroid/app/Activity;IZ)Landroid/view/View;
+    invoke-static {p0, v7, v9}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeCard(Landroid/app/Activity;IZ)Landroid/view/View;
 
     move-result-object v9
 
@@ -2139,7 +2139,7 @@
     .line 1150
     const/16 v7, 0xe
 
-    invoke-static {v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v9
 
@@ -2159,11 +2159,11 @@
     invoke-virtual {v1, v6}, Landroid/widget/TextView;->setGravity(I)V
 
     .line 1154
-    invoke-static {p0, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v6
 
-    invoke-static {p0, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v9
 
@@ -2177,13 +2177,13 @@
     .line 1156
     const/16 v9, 0x9
 
-    invoke-static {v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v9}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v9
 
     const/16 v10, 0xa
 
-    invoke-static {v10}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v10}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v10
 
@@ -2194,7 +2194,7 @@
     invoke-direct {v5, v6, v9}, Landroid/graphics/drawable/GradientDrawable;-><init>(Landroid/graphics/drawable/GradientDrawable$Orientation;[I)V
 
     .line 1157
-    invoke-static {p0, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v6
 
@@ -2206,9 +2206,9 @@
     invoke-virtual {v1, v5}, Landroid/widget/TextView;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
     .line 1159
-    new-instance v5, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$8;
+    new-instance v5, Lcom/developeramira/remotemediastar/theme/ThemeManager$8;
 
-    invoke-direct {v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$8;-><init>()V
+    invoke-direct {v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager$8;-><init>()V
 
     invoke-virtual {v1, v5}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -2220,7 +2220,7 @@
     .line 1168
     const/16 v6, 0x10
 
-    invoke-static {p0, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result p0
 
@@ -2244,7 +2244,7 @@
     .locals 4
 
     .line 419
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->panelButtonColor(Ljava/lang/String;)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->panelButtonColor(Ljava/lang/String;)I
 
     move-result p0
 
@@ -2258,7 +2258,7 @@
 
     const v3, 0x3d75c28f    # 0.06f
 
-    invoke-static {p0, v2, v3}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->blend(IIF)I
+    invoke-static {p0, v2, v3}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->blend(IIF)I
 
     move-result v2
 
@@ -2269,13 +2269,13 @@
     invoke-direct {v0, v1, p0}, Landroid/graphics/drawable/GradientDrawable;-><init>(Landroid/graphics/drawable/GradientDrawable$Orientation;[I)V
 
     .line 422
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object p0
 
     const/16 v1, 0xc
 
-    invoke-static {p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result p0
 
@@ -2284,13 +2284,13 @@
     invoke-virtual {v0, p0}, Landroid/graphics/drawable/GradientDrawable;->setCornerRadius(F)V
 
     .line 423
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object p0
 
     const/4 v1, 0x1
 
-    invoke-static {p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result p0
 
@@ -2300,13 +2300,13 @@
 
     const/16 v1, 0x9
 
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v1
 
     const/16 v2, 0x66
 
-    invoke-static {v1, v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->alpha(II)I
+    invoke-static {v1, v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->alpha(II)I
 
     move-result v1
 
@@ -2321,12 +2321,12 @@
 
     .line 429
     :try_start_0
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->button(Ljava/lang/String;)Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->button(Ljava/lang/String;)Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object v0
 
     .line 430
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->panelButtonColor(Ljava/lang/String;)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->panelButtonColor(Ljava/lang/String;)I
 
     move-result v1
 
@@ -2342,13 +2342,13 @@
     .line 433
     const/16 v5, 0x9
 
-    invoke-static {v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v6
 
     const v7, 0x3ec28f5c    # 0.38f
 
-    invoke-static {v1, v6, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->blend(IIF)I
+    invoke-static {v1, v6, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->blend(IIF)I
 
     move-result v6
 
@@ -2357,13 +2357,13 @@
     aput v6, v4, v7
 
     .line 434
-    invoke-static {v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v6
 
     const v7, 0x3e4ccccd    # 0.2f
 
-    invoke-static {v1, v6, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->blend(IIF)I
+    invoke-static {v1, v6, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->blend(IIF)I
 
     move-result v1
 
@@ -2374,13 +2374,13 @@
     invoke-direct {v2, v3, v4}, Landroid/graphics/drawable/GradientDrawable;-><init>(Landroid/graphics/drawable/GradientDrawable$Orientation;[I)V
 
     .line 435
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object v1
 
     const/16 v3, 0xc
 
-    invoke-static {v1, v3}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v1, v3}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v1
 
@@ -2389,11 +2389,11 @@
     invoke-virtual {v2, v1}, Landroid/graphics/drawable/GradientDrawable;->setCornerRadius(F)V
 
     .line 436
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object v1
 
-    invoke-static {v1, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v1, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v1
 
@@ -2401,7 +2401,7 @@
 
     move-result v1
 
-    invoke-static {v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v3
 
@@ -2413,13 +2413,13 @@
     .line 438
     new-instance v1, Landroid/graphics/drawable/RippleDrawable;
 
-    invoke-static {v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v2
 
     const/16 v3, 0x55
 
-    invoke-static {v2, v3}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->alpha(II)I
+    invoke-static {v2, v3}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->alpha(II)I
 
     move-result v2
 
@@ -2440,7 +2440,7 @@
     move-exception v0
 
     .line 446
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->button(Ljava/lang/String;)Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->button(Ljava/lang/String;)Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object p0
 
@@ -2459,13 +2459,13 @@
     invoke-virtual {v0, p0}, Landroid/graphics/drawable/GradientDrawable;->setColor(I)V
 
     .line 411
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object p0
 
     const/16 v1, 0x10
 
-    invoke-static {p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result p0
 
@@ -2477,13 +2477,13 @@
     if-eqz p1, :cond_0
 
     .line 413
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object p0
 
     const/4 v1, 0x1
 
-    invoke-static {p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result p0
 
@@ -2526,7 +2526,7 @@
     .line 313
     const/16 v0, 0x9
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -2537,7 +2537,7 @@
     .locals 1
 
     .line 305
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loadPrefs()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loadPrefs()V
 
     .line 306
     if-ltz p0, :cond_1
@@ -2550,7 +2550,7 @@
 
     .line 309
     :cond_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     aget p0, v0, p0
 
@@ -2568,7 +2568,7 @@
     .locals 1
 
     .line 273
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
     array-length v0, v0
 
@@ -2579,7 +2579,7 @@
     .locals 1
 
     .line 149
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
 
     move-result-object v0
 
@@ -2592,7 +2592,7 @@
     .line 154
     :cond_0
     :try_start_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/main;->mostCurrent:Lcom/saminsoftware/remotemediastar/main;
+    sget-object v0, Lcom/developeramira/remotemediastar/main;->mostCurrent:Lcom/developeramira/remotemediastar/main;
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -2656,7 +2656,7 @@
     .locals 1
 
     .line 578
-    sget v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->effect:I
+    sget v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->effect:I
 
     return v0
 .end method
@@ -2665,10 +2665,10 @@
     .locals 1
 
     .line 212
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loadPrefs()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loadPrefs()V
 
     .line 213
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
 
     return-object v0
 .end method
@@ -2679,7 +2679,7 @@
     .line 329
     const/4 v0, 0x2
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -2692,7 +2692,7 @@
     .line 325
     const/4 v0, 0x0
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -2703,12 +2703,12 @@
     .locals 5
 
     .line 811
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
 
     .line 812
     const/4 v1, 0x0
 
-    sput-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
+    sput-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
 
     .line 813
     if-nez v0, :cond_0
@@ -2718,14 +2718,14 @@
 
     .line 816
     :cond_0
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
 
     .line 817
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
 
-    new-instance v2, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$4;
+    new-instance v2, Lcom/developeramira/remotemediastar/theme/ThemeManager$4;
 
-    invoke-direct {v2, v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$4;-><init>(Landroid/view/View;)V
+    invoke-direct {v2, v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$4;-><init>(Landroid/view/View;)V
 
     const-wide/16 v3, 0xbe
 
@@ -2740,7 +2740,7 @@
 
     .line 501
     :try_start_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/main;->mostCurrent:Lcom/saminsoftware/remotemediastar/main;
+    sget-object v0, Lcom/developeramira/remotemediastar/main;->mostCurrent:Lcom/developeramira/remotemediastar/main;
 
     .line 503
     if-nez v0, :cond_0
@@ -2750,7 +2750,7 @@
 
     .line 506
     :cond_0
-    iget-object v0, v0, Lcom/saminsoftware/remotemediastar/main;->_vvv1:Lanywheresoftware/b4a/objects/PanelWrapper;
+    iget-object v0, v0, Lcom/developeramira/remotemediastar/main;->_vvv1:Lanywheresoftware/b4a/objects/PanelWrapper;
 
     .line 507
     if-eqz v0, :cond_3
@@ -2777,15 +2777,15 @@
     .line 512
     check-cast v1, Landroid/view/View;
 
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
 
     .line 514
     :cond_2
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
 
-    new-instance v2, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$1;
+    new-instance v2, Lcom/developeramira/remotemediastar/theme/ThemeManager$1;
 
-    invoke-direct {v2, v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$1;-><init>(Lanywheresoftware/b4a/objects/PanelWrapper;)V
+    invoke-direct {v2, v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$1;-><init>(Lanywheresoftware/b4a/objects/PanelWrapper;)V
 
     const-wide/16 v3, 0xaf
 
@@ -2814,12 +2814,12 @@
     .locals 5
 
     .line 1093
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
     .line 1094
     const/4 v1, 0x0
 
-    sput-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sput-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
     .line 1095
     if-nez v0, :cond_0
@@ -2829,14 +2829,14 @@
 
     .line 1098
     :cond_0
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
 
     .line 1099
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
 
-    new-instance v2, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$7;
+    new-instance v2, Lcom/developeramira/remotemediastar/theme/ThemeManager$7;
 
-    invoke-direct {v2, v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$7;-><init>(Landroid/view/View;)V
+    invoke-direct {v2, v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$7;-><init>(Landroid/view/View;)V
 
     const-wide/16 v3, 0xbe
 
@@ -2873,7 +2873,7 @@
     const/4 v2, 0x0
 
     :goto_0
-    sget-object v3, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v3, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
     array-length v4, v3
 
@@ -2947,13 +2947,13 @@
 
     .line 1052
     :try_start_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loadPrefs()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loadPrefs()V
 
     .line 1053
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->syncLegacyFlag()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->syncLegacyFlag()V
 
     .line 1054
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
 
     move-result-object v0
 
@@ -2961,7 +2961,7 @@
     if-eqz v0, :cond_0
 
     .line 1056
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->applyToWindow(Landroid/app/Activity;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->applyToWindow(Landroid/app/Activity;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -2982,12 +2982,12 @@
     .locals 2
 
     .line 296
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loadPrefs()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loadPrefs()V
 
     .line 297
     const-string v0, "light"
 
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
 
     invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -3002,7 +3002,7 @@
     .locals 4
 
     .line 178
-    sget-boolean v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loaded:Z
+    sget-boolean v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loaded:Z
 
     if-eqz v0, :cond_0
 
@@ -3013,13 +3013,13 @@
     :cond_0
     const/4 v0, 0x1
 
-    sput-boolean v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loaded:Z
+    sput-boolean v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loaded:Z
 
     .line 182
     nop
 
     .line 183
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->prefs()Landroid/content/SharedPreferences;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->prefs()Landroid/content/SharedPreferences;
 
     move-result-object v0
 
@@ -3035,7 +3035,7 @@
 
     move-result-object v0
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->indexOf(Ljava/lang/String;)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->indexOf(Ljava/lang/String;)I
 
     move-result v0
 
@@ -3056,7 +3056,7 @@
     const/4 v0, 0x0
 
     :try_start_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object v1
 
@@ -3099,7 +3099,7 @@
     invoke-virtual {v1}, Ljava/io/BufferedReader;->close()V
 
     .line 198
-    invoke-static {v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->indexOf(Ljava/lang/String;)I
+    invoke-static {v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->indexOf(Ljava/lang/String;)I
 
     move-result v1
     :try_end_0
@@ -3122,18 +3122,18 @@
     .line 207
     :cond_3
     :goto_1
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
     aget-object v1, v1, v0
 
-    sput-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
+    sput-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
 
     .line 208
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->PALETTES:[[I
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->PALETTES:[[I
 
     aget-object v0, v1, v0
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     .line 209
     return-void
@@ -3147,7 +3147,7 @@
 
     const-string v1, "developeramira"
 
-    invoke-static {v0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->openLink(Ljava/lang/String;Ljava/lang/String;)Z
+    invoke-static {v0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->openLink(Ljava/lang/String;Ljava/lang/String;)Z
 
     .line 1047
     return-void
@@ -3164,9 +3164,9 @@
 
     if-eqz p0, :cond_0
 
-    new-instance v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$11;
+    new-instance v0, Lcom/developeramira/remotemediastar/theme/ThemeManager$11;
 
-    invoke-direct {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$11;-><init>()V
+    invoke-direct {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$11;-><init>()V
 
     invoke-virtual {p0, v0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -3182,7 +3182,7 @@
 
     const-string v1, "x.amirrezaa1"
 
-    invoke-static {v0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->openLink(Ljava/lang/String;Ljava/lang/String;)Z
+    invoke-static {v0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->openLink(Ljava/lang/String;Ljava/lang/String;)Z
 
     .line 1039
     return-void
@@ -3206,7 +3206,7 @@
     invoke-direct {v1, v2, p0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
     .line 1016
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
 
     move-result-object p0
 
@@ -3220,7 +3220,7 @@
 
     .line 1020
     :cond_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object p0
 
@@ -3259,7 +3259,7 @@
 
     move-result-object p0
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -3275,7 +3275,7 @@
     .line 1031
     const-string p0, "\u0627\u0645\u06a9\u0627\u0646 \u0628\u0627\u0632 \u06a9\u0631\u062f\u0646 \u0644\u06cc\u0646\u06a9 \u0648\u062c\u0648\u062f \u0646\u062f\u0627\u0631\u062f"
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
 
     .line 1033
     return v0
@@ -3289,7 +3289,7 @@
 
     const-string v1, "developer_as"
 
-    invoke-static {v0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->openLink(Ljava/lang/String;Ljava/lang/String;)Z
+    invoke-static {v0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->openLink(Ljava/lang/String;Ljava/lang/String;)Z
 
     .line 1043
     return-void
@@ -3301,7 +3301,7 @@
     .line 333
     const/4 v0, 0x0
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -3314,17 +3314,17 @@
     .line 401
     const/4 v0, 0x0
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
     const/4 v1, 0x2
 
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v1
 
-    invoke-static {v0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->vertical(II)Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {v0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->vertical(II)Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object v0
 
@@ -3337,7 +3337,7 @@
     .line 341
     const/4 v0, 0x4
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -3348,7 +3348,7 @@
     .locals 3
 
     .line 346
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loadPrefs()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loadPrefs()V
 
     .line 347
     const/4 v0, 0x7
@@ -3356,7 +3356,7 @@
     if-nez p0, :cond_0
 
     .line 348
-    sget-object p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sget-object p0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     aget p0, p0, v0
 
@@ -3400,7 +3400,7 @@
     if-eqz v1, :cond_2
 
     .line 355
-    sget-object p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sget-object p0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     aget v0, p0, v2
 
@@ -3410,7 +3410,7 @@
 
     const v1, 0x3e851eb8    # 0.26f
 
-    invoke-static {v0, p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->blend(IIF)I
+    invoke-static {v0, p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->blend(IIF)I
 
     move-result p0
 
@@ -3446,7 +3446,7 @@
 
     .line 360
     :cond_3
-    sget-object p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sget-object p0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     aget p0, p0, v0
 
@@ -3455,7 +3455,7 @@
     .line 358
     :cond_4
     :goto_0
-    sget-object p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sget-object p0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     aget v0, p0, v2
 
@@ -3465,7 +3465,7 @@
 
     const v1, 0x3e75c28f    # 0.24f
 
-    invoke-static {v0, p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->blend(IIF)I
+    invoke-static {v0, p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->blend(IIF)I
 
     move-result p0
 
@@ -3474,7 +3474,7 @@
     .line 352
     :cond_5
     :goto_1
-    sget-object p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sget-object p0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     aget v0, p0, v2
 
@@ -3484,7 +3484,7 @@
 
     const v1, 0x3e4ccccd    # 0.2f
 
-    invoke-static {v0, p0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->blend(IIF)I
+    invoke-static {v0, p0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->blend(IIF)I
 
     move-result p0
 
@@ -3497,17 +3497,17 @@
     .line 405
     const/4 v0, 0x3
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
     const/4 v1, 0x4
 
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v1
 
-    invoke-static {v0, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->vertical(II)Landroid/graphics/drawable/GradientDrawable;
+    invoke-static {v0, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->vertical(II)Landroid/graphics/drawable/GradientDrawable;
 
     move-result-object v0
 
@@ -3520,7 +3520,7 @@
     .line 337
     const/4 v0, 0x3
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -3531,7 +3531,7 @@
     .locals 4
 
     .line 161
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object v0
 
@@ -3679,7 +3679,7 @@
     .line 289
     if-ltz p0, :cond_1
 
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
     array-length v0, v0
 
@@ -3709,7 +3709,7 @@
 
     rem-int/lit8 p0, p0, 0x5
 
-    sput p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->effect:I
+    sput p0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->effect:I
 
     .line 575
     return-void
@@ -3719,10 +3719,10 @@
     .locals 2
 
     .line 217
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->loadPrefs()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loadPrefs()V
 
     .line 218
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->indexOf(Ljava/lang/String;)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->indexOf(Ljava/lang/String;)I
 
     move-result p0
 
@@ -3734,21 +3734,21 @@
 
     .line 222
     :cond_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
     aget-object v0, v0, p0
 
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
 
     .line 223
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->PALETTES:[[I
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->PALETTES:[[I
 
     aget-object p0, v0, p0
 
-    sput-object p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->current:[I
+    sput-object p0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->current:[I
 
     .line 224
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->prefs()Landroid/content/SharedPreferences;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->prefs()Landroid/content/SharedPreferences;
 
     move-result-object p0
 
@@ -3763,7 +3763,7 @@
 
     const-string v0, "theme_id"
 
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->currentId:Ljava/lang/String;
 
     invoke-interface {p0, v0, v1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
 
@@ -3790,15 +3790,15 @@
     .locals 1
 
     .line 235
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->safe(I)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->safe(I)I
 
     move-result p0
 
     aget-object p0, v0, p0
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->setTheme(Ljava/lang/String;)V
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->setTheme(Ljava/lang/String;)V
 
     .line 236
     return-void
@@ -3809,7 +3809,7 @@
 
     .line 788
     :try_start_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
 
     move-result-object v0
 
@@ -3821,14 +3821,14 @@
 
     .line 792
     :cond_0
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
 
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
 
     .line 793
     const/4 v1, 0x0
 
-    sput-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
+    sput-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
 
     .line 794
     const v1, 0x1020002
@@ -3847,12 +3847,12 @@
 
     .line 798
     :cond_1
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->buildDeveloperOverlay(Landroid/app/Activity;)Landroid/widget/FrameLayout;
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->buildDeveloperOverlay(Landroid/app/Activity;)Landroid/widget/FrameLayout;
 
     move-result-object v0
 
     .line 799
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->developerOverlay:Landroid/view/View;
 
     .line 800
     check-cast v1, Landroid/view/ViewGroup;
@@ -3866,7 +3866,7 @@
     invoke-virtual {v1, v0, v2}, Landroid/view/ViewGroup;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
     .line 803
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -3880,7 +3880,7 @@
     .line 805
     const-string v0, "\u062e\u0637\u0627 \u062f\u0631 \u0628\u0627\u0632 \u06a9\u0631\u062f\u0646 \u0635\u0641\u062d\u0647 \u062a\u0648\u0633\u0639\u0647\u200c\u062f\u0647\u0646\u062f\u0647"
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
 
     .line 808
     :goto_0
@@ -3892,7 +3892,7 @@
 
     .line 530
     :try_start_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/main;->mostCurrent:Lcom/saminsoftware/remotemediastar/main;
+    sget-object v0, Lcom/developeramira/remotemediastar/main;->mostCurrent:Lcom/developeramira/remotemediastar/main;
 
     .line 532
     if-nez v0, :cond_0
@@ -3902,7 +3902,7 @@
 
     .line 535
     :cond_0
-    iget-object v0, v0, Lcom/saminsoftware/remotemediastar/main;->_vvv1:Lanywheresoftware/b4a/objects/PanelWrapper;
+    iget-object v0, v0, Lcom/developeramira/remotemediastar/main;->_vvv1:Lanywheresoftware/b4a/objects/PanelWrapper;
 
     .line 536
     if-eqz v0, :cond_3
@@ -3929,7 +3929,7 @@
     .line 541
     check-cast v0, Landroid/view/View;
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -3956,7 +3956,7 @@
 
     .line 1070
     :try_start_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->activity()Landroid/app/Activity;
 
     move-result-object v0
 
@@ -3968,14 +3968,14 @@
 
     .line 1074
     :cond_0
-    sget-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sget-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
-    invoke-static {v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
+    invoke-static {v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->remove(Landroid/view/View;)V
 
     .line 1075
     const/4 v1, 0x0
 
-    sput-object v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sput-object v1, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
     .line 1076
     const v1, 0x1020002
@@ -3994,12 +3994,12 @@
 
     .line 1080
     :cond_1
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->buildThemeOverlay(Landroid/app/Activity;)Landroid/widget/FrameLayout;
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->buildThemeOverlay(Landroid/app/Activity;)Landroid/widget/FrameLayout;
 
     move-result-object v0
 
     .line 1081
-    sput-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
+    sput-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeOverlay:Landroid/view/View;
 
     .line 1082
     check-cast v1, Landroid/view/ViewGroup;
@@ -4013,7 +4013,7 @@
     invoke-virtual {v1, v0, v2}, Landroid/view/ViewGroup;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
     .line 1085
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
@@ -4027,7 +4027,7 @@
     .line 1087
     const-string v0, "\u062e\u0637\u0627 \u062f\u0631 \u0628\u0627\u0632 \u06a9\u0631\u062f\u0646 \u0627\u0646\u062a\u062e\u0627\u0628 \u062a\u0645"
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
 
     .line 1090
     :goto_0
@@ -4060,13 +4060,13 @@
     .line 957
     const/4 v4, 0x5
 
-    invoke-static {v4}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v4}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v4
 
     const/4 v5, 0x6
 
-    invoke-static {v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v5
 
@@ -4079,7 +4079,7 @@
     .line 958
     const/16 v3, 0xe
 
-    invoke-static {p0, v3}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v3}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v4
 
@@ -4090,7 +4090,7 @@
     .line 959
     const/4 v4, 0x1
 
-    invoke-static {p0, v4}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v4}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v5
 
@@ -4100,13 +4100,13 @@
 
     const/16 v6, 0x9
 
-    invoke-static {v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v7
 
     const/16 v8, 0x66
 
-    invoke-static {v7, v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->alpha(II)I
+    invoke-static {v7, v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->alpha(II)I
 
     move-result v7
 
@@ -4116,7 +4116,7 @@
     invoke-virtual {v0, v2}, Landroid/widget/LinearLayout;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
     .line 961
-    invoke-static {p0, v3}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v3}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v2
 
@@ -4127,9 +4127,9 @@
     invoke-virtual {v0, v4}, Landroid/widget/LinearLayout;->setClickable(Z)V
 
     .line 964
-    new-instance v2, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$6;
+    new-instance v2, Lcom/developeramira/remotemediastar/theme/ThemeManager$6;
 
-    invoke-direct {v2, p4, p3}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$6;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v2, p4, p3}, Lcom/developeramira/remotemediastar/theme/ThemeManager$6;-><init>(Ljava/lang/String;Ljava/lang/String;)V
 
     invoke-virtual {v0, v2}, Landroid/widget/LinearLayout;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -4156,11 +4156,11 @@
 
     const/16 v2, 0x24
 
-    invoke-static {p0, v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v3
 
-    invoke-static {p0, v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v2
 
@@ -4169,7 +4169,7 @@
     .line 977
     const/16 v2, 0xc
 
-    invoke-static {p0, v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v3
 
@@ -4195,7 +4195,7 @@
     invoke-virtual {p4, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 985
-    invoke-static {v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result p2
 
@@ -4223,7 +4223,7 @@
     invoke-virtual {p2, p3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 992
-    invoke-static {v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result p3
 
@@ -4259,7 +4259,7 @@
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 1001
-    invoke-static {v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result p2
 
@@ -4283,7 +4283,7 @@
     .line 1007
     const/16 p2, 0xa
 
-    invoke-static {p0, p2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {p0, p2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result p0
 
@@ -4301,14 +4301,14 @@
 
     .line 241
     :try_start_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->isDark()Z
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->isDark()Z
 
     move-result v0
 
-    sput-boolean v0, Lcom/saminsoftware/remotemediastar/main;->_vv1:Z
+    sput-boolean v0, Lcom/developeramira/remotemediastar/main;->_vv1:Z
 
     .line 242
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->ctx()Landroid/content/Context;
 
     move-result-object v0
 
@@ -4332,7 +4332,7 @@
     invoke-direct {v1, v2}, Ljava/io/FileWriter;-><init>(Ljava/io/File;)V
 
     .line 246
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->isDark()Z
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->isDark()Z
 
     move-result v0
 
@@ -4372,7 +4372,7 @@
     .line 321
     const/16 v0, 0xc
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->color(I)I
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
 
     move-result v0
 
@@ -4387,7 +4387,7 @@
 
     move/from16 v1, p1
 
-    sget-object v2, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->PALETTES:[[I
+    sget-object v2, Lcom/developeramira/remotemediastar/theme/ThemeManager;->PALETTES:[[I
 
     aget-object v2, v2, v1
 
@@ -4426,7 +4426,7 @@
     invoke-direct {v6, v7, v8}, Landroid/graphics/drawable/GradientDrawable;-><init>(Landroid/graphics/drawable/GradientDrawable$Orientation;[I)V
 
     .line 1183
-    invoke-static {v0, v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v5
 
@@ -4447,7 +4447,7 @@
     const/4 v7, 0x1
 
     :goto_0
-    invoke-static {v0, v7}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v7}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v7
 
@@ -4471,7 +4471,7 @@
     .line 1185
     const/16 v11, 0xaa
 
-    invoke-static {v10, v11}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->alpha(II)I
+    invoke-static {v10, v11}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->alpha(II)I
 
     move-result v10
 
@@ -4485,7 +4485,7 @@
     .line 1187
     const/16 v6, 0xc
 
-    invoke-static {v0, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v7
 
@@ -4542,7 +4542,7 @@
     invoke-virtual {v12, v14}, Landroid/graphics/drawable/GradientDrawable;->setColor(I)V
 
     .line 1198
-    invoke-static {v0, v5}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v5}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v14
 
@@ -4552,7 +4552,7 @@
 
     const/16 v9, 0x66
 
-    invoke-static {v13, v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->alpha(II)I
+    invoke-static {v13, v9}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->alpha(II)I
 
     move-result v9
 
@@ -4566,11 +4566,11 @@
 
     const/16 v12, 0x18
 
-    invoke-static {v0, v12}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v12}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v13
 
-    invoke-static {v0, v12}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v12}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v12
 
@@ -4579,7 +4579,7 @@
     .line 1201
     const/4 v12, 0x4
 
-    invoke-static {v0, v12}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v12}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v12
 
@@ -4623,11 +4623,11 @@
     invoke-direct {v9, v4, v10, v11}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
 
     .line 1211
-    invoke-static {v0, v6}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v6}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v11
 
-    invoke-static {v0, v8}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v8}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v8
 
@@ -4639,7 +4639,7 @@
     invoke-direct {v4, v0}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     .line 1214
-    sget-object v8, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
+    sget-object v8, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
 
     aget-object v8, v8, v1
 
@@ -4669,7 +4669,7 @@
     invoke-direct {v4, v0}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     .line 1221
-    sget-object v6, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_TAGS:[Ljava/lang/String;
+    sget-object v6, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_TAGS:[Ljava/lang/String;
 
     aget-object v6, v6, v1
 
@@ -4738,9 +4738,9 @@
     invoke-virtual {v3, v5}, Landroid/widget/LinearLayout;->setClickable(Z)V
 
     .line 1234
-    new-instance v2, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9;
+    new-instance v2, Lcom/developeramira/remotemediastar/theme/ThemeManager$9;
 
-    invoke-direct {v2, v1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9;-><init>(I)V
+    invoke-direct {v2, v1}, Lcom/developeramira/remotemediastar/theme/ThemeManager$9;-><init>(I)V
 
     invoke-virtual {v3, v2}, Landroid/widget/LinearLayout;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -4752,7 +4752,7 @@
     .line 1254
     const/16 v2, 0xa
 
-    invoke-static {v0, v2}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
+    invoke-static {v0, v2}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->dp(Landroid/content/Context;I)I
 
     move-result v0
 
@@ -4769,9 +4769,9 @@
     .locals 1
 
     .line 277
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->safe(I)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->safe(I)I
 
     move-result p0
 
@@ -4784,9 +4784,9 @@
     .locals 1
 
     .line 281
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->safe(I)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->safe(I)I
 
     move-result p0
 
@@ -4799,9 +4799,9 @@
     .locals 1
 
     .line 285
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_TAGS:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_TAGS:[Ljava/lang/String;
 
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->safe(I)I
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->safe(I)I
 
     move-result p0
 
@@ -4815,11 +4815,11 @@
 
     .line 1265
     :try_start_0
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->MAIN:Landroid/os/Handler;
 
-    new-instance v1, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$10;
+    new-instance v1, Lcom/developeramira/remotemediastar/theme/ThemeManager$10;
 
-    invoke-direct {v1, p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$10;-><init>(Ljava/lang/String;)V
+    invoke-direct {v1, p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$10;-><init>(Ljava/lang/String;)V
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
     :try_end_0
@@ -4841,10 +4841,10 @@
     .locals 0
 
     .line 718
-    invoke-static {p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
+    invoke-static {p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateOut(Landroid/view/View;)V
 
     .line 719
-    invoke-static {p1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
+    invoke-static {p1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateIn(Landroid/view/View;)V
 
     .line 720
     return-void

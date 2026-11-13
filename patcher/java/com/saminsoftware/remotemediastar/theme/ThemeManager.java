@@ -1,4 +1,4 @@
-package com.saminsoftware.remotemediastar.theme;
+package com.developeramira.remotemediastar.theme;
 
 import android.app.Activity;
 import android.content.Context;
@@ -43,7 +43,7 @@ import android.widget.Toast;
  *  * the "developer" (about) page with the Instagram / Telegram / GitHub bridges
  *
  * NOTE: this class intentionally references the original B4A package name of the
- * *code* (com.saminsoftware.remotemediastar) while the *application id* of the APK
+ * *code* (com.developeramira.remotemediastar) while the *application id* of the APK
  * is com.developeramira.remotemediastar, so the app can be installed next to the
  * original build.
  */
@@ -139,7 +139,7 @@ public final class ThemeManager {
 
     private static Activity activity() {
         try {
-            return com.saminsoftware.remotemediastar.main.mostCurrent;
+            return com.developeramira.remotemediastar.main.mostCurrent;
         } catch (Throwable t) {
             return null;
         }
@@ -151,7 +151,7 @@ public final class ThemeManager {
             return a;
         }
         try {
-            return com.saminsoftware.remotemediastar.main.mostCurrent;
+            return com.developeramira.remotemediastar.main.mostCurrent;
         } catch (Throwable t) {
             return null;
         }
@@ -238,7 +238,7 @@ public final class ThemeManager {
     /** Keeps the old light/dark flag in sync so the original code keeps working. */
     public static void syncLegacyFlag() {
         try {
-            com.saminsoftware.remotemediastar.main._vv1 = isDark();
+            com.developeramira.remotemediastar.main._vv1 = isDark();
             Context c = ctx();
             if (c != null) {
                 java.io.FileWriter w = new java.io.FileWriter(
@@ -487,7 +487,7 @@ public final class ThemeManager {
             if (a != null) {
                 applyToWindow(a);
             }
-            com.saminsoftware.remotemediastar.main._vv5();
+            com.developeramira.remotemediastar.main._vv5();
             View root = a == null ? null : a.findViewById(android.R.id.content);
             animateHero(root);
         } catch (Throwable t) {
@@ -498,8 +498,8 @@ public final class ThemeManager {
     /** Animated exit for the settings overlay (fade + slide, then detach). */
     public static void hideSettingsPanel() {
         try {
-            final com.saminsoftware.remotemediastar.main a =
-                    com.saminsoftware.remotemediastar.main.mostCurrent;
+            final com.developeramira.remotemediastar.main a =
+                    com.developeramira.remotemediastar.main.mostCurrent;
             if (a == null) {
                 return;
             }
@@ -527,8 +527,8 @@ public final class ThemeManager {
     /** Entry animation for the settings overlay (called right after it is attached). */
     public static void showSettingsPanelIn() {
         try {
-            final com.saminsoftware.remotemediastar.main a =
-                    com.saminsoftware.remotemediastar.main.mostCurrent;
+            final com.developeramira.remotemediastar.main a =
+                    com.developeramira.remotemediastar.main.mostCurrent;
             if (a == null) {
                 return;
             }

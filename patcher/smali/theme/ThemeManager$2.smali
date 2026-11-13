@@ -1,4 +1,4 @@
-.class final Lcom/saminsoftware/remotemediastar/theme/ThemeManager$2;
+.class final Lcom/developeramira/remotemediastar/theme/ThemeManager$2;
 .super Ljava/lang/Object;
 .source "ThemeManager.java"
 
@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->animateStagger(Landroid/view/ViewGroup;)V
+    value = Lcom/developeramira/remotemediastar/theme/ThemeManager;->animateStagger(Landroid/view/ViewGroup;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -26,7 +26,7 @@
     .locals 0
 
     .line 700
-    iput-object p1, p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$2;->val$child:Landroid/view/View;
+    iput-object p1, p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$2;->val$child:Landroid/view/View;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -40,7 +40,7 @@
 
     .line 704
     :try_start_0
-    iget-object v0, p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$2;->val$child:Landroid/view/View;
+    iget-object v0, p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$2;->val$child:Landroid/view/View;
 
     invoke-virtual {v0}, Landroid/view/View;->animate()Landroid/view/ViewPropertyAnimator;
 

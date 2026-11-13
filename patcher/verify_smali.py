@@ -185,9 +185,15 @@ def verify_tree(root):
 
 def assert_patch_invariants(root):
     """Regressions that must never come back."""
-    main = os.path.join(root, 'smali', 'com', 'saminsoftware', 'remotemediastar', 'main.smali')
-    if not os.path.exists(main):
-        print('FAIL: main.smali not found at %s' % main)
+    # the patch moves the class tree to the new application id, so look there
+    main = None
+    for pkg in ('com/developeramira/remotemediastar', 'com/saminsoftware/remotemediastar'):
+        cand = os.path.join(root, 'smali', *pkg.split('/'), 'main.smali')
+        if os.path.exists(cand):
+            main = cand
+            break
+    if main is None:
+        print('FAIL: main.smali not found under smali/')
         return 1
     src = open(main, encoding='utf-8', errors='replace').read()
     bad = 0
