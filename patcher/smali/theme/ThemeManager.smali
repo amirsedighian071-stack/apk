@@ -2520,22 +2520,14 @@
     return p0
 .end method
 
-.method public static color()I
-    .locals 1
-
-    .line 313
-    const/16 v0, 0x9
-
-    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
-
-    move-result v0
-
-    return v0
-.end method
-
 .method public static color(I)I
     .locals 1
 
+    # The routed call sites in main cannot pass the slot in a register: every
+    # register there already holds a live value from the original code and
+    # writing to one corrupts unrelated drawing state.  They leave the slot in
+    # main->_paletteSlot instead and call this with no arguments; the argument
+    # form is kept for the direct callers in this file.
     .line 305
     invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->loadPrefs()V
 
@@ -2562,6 +2554,20 @@
     const/high16 p0, -0x1000000
 
     return p0
+.end method
+
+.method public static color()I
+    .locals 1
+
+    # argument-less variant: read the slot the routined call sites staged
+    .line 316
+    sget v0, Lcom/developeramira/remotemediastar/main;->_paletteSlot:I
+
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->color(I)I
+
+    move-result v0
+
+    return v0
 .end method
 
 .method public static count()I

@@ -190,6 +190,87 @@ which apktool reported as a package rename. Both now carry
 `com.developeramira.remotemediastar`, and `androidsupportmultidexversion.txt`
 was restored.
 
+## Fix: overlapping buttons and jittery layout (15.0.1 build 5)
+
+The app ran but the UI was a mess: the POWER and AUDIO captions sat on of each
+other, the developer button covered the "buy dongle" entry, and the screen
+flickered. The stock app is fine, so both faults were introduced by this fork.
+
+**There are no XML layouts to fix.** The APK ships exactly two `styles.xml`
+files and one `drawable/icon.png` - no `layout/` directory at all. B4A builds
+every widget programmatically and positions it with absolute pixel offsets
+computed in `main._vvvv0` (settings panel) and `main._vv5` (remote screen).
+That is why the brief's XML checks (duplicate ids, `match_parent` in the wrong
+place, zero/negative dimensions, `layout_weight`) have no file to apply to:
+there are no ids, no dimensions resources and no weights anywhere in this app.
+
+### Defect 1: the developer button was drawn on top of the last real button
+
+`PanelWrapper.AddView(view, left, top, width, height)` reads five consecutive
+registers `v16..v21`. The stock code copies the geometry in right before every
+call and advances the vertical cursor `v19` *after* the `AddView`:
+
+```
+add-int v19, v19, v21     # v21 = button height
+add-int v19, v19, v1      # v1  = gap
+```
+
+The injected block appended its button and only then did `move v16/v17` - it
+never set `v18..v21`, and it never advanced the cursor first. The result is
+that the developer button reused the previous button's `top`, so the two were
+drawn at exactly the same place:
+
+```
+AddView #7  (buy dongle)   top: cursor after 3 advances
+AddView #8  (developer)    top: cursor after 3 advances   <-- same
+```
+
+Now `v19` is advanced before the `AddView`, using the same gap the stock code
+uses (`v5` is the constant `0` set at the top of the method and `v21` is the
+button height), and `v18`/`v20` are set explicitly.
+
+### Defect 2: the palette routing overwrote live registers
+
+Routes were rewritten as
+
+```
+const/16 <r>, <slot>                  # r = the register that held red
+invoke-static {<r>}, ThemeManager->color(I)I
+```
+
+`<r>` is a register the original sequence already holds a value in, and it is
+still live: the original `RGB(r,g,b)` only *read* it. Overwriting it silently
+changed unrelated drawing state further down - text offsets, gradient
+endpoints, padding - which is exactly the corruption that looks like "labels
+drawn at the wrong place" and produces the jumping.
+
+Every routed site now stages the slot in a dedicated field and calls the
+argument-less overload, so no original register is written:
+
+```
+const/16 <r>, <slot>
+sput <r>, main->_paletteSlot:I
+invoke-static {}, ThemeManager->color()I
+move-result <r>
+```
+
+`ThemeManager.color()` reads `_paletteSlot` and delegates to `color(I)`.
+
+### Gate
+
+`patcher/verify_layout.py` models both defects and fails the build on either:
+
+* an `AddView` whose register span is not exactly 6 consecutive registers
+* any `color(I)` call site still passing a register
+* the developer entry not being declared exactly once
+
+Run against the previous build it reports **50 layout problems**; the fixed
+build reports:
+
+```
+OK: 50 routed colour sites, AddView blocks consistent, developer entry present once
+```
+
 ## Fix: ClassNotFoundException for the starter service (15.0.1 build 4)
 
 **Symptom.** The stack trace named the class that could not be found: B4A was
