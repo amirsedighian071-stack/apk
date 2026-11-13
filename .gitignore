@@ -1,6 +1,13 @@
-# build scratch / toolchain downloads
+# build scratch
 build/
+
+# toolchain downloads (see patcher/README.md to fetch them)
 tools/*.jar
+
 *.idsig
+
+# signing keys are normally never committed; this one is deliberate so that
+# every release shares a single certificate and can be updated in place.
 *.jks
 *.keystore
+!patcher/tools/release.jks

@@ -15,14 +15,14 @@ OUT_APK="${OUT_APK:-$ROOT/MediaStar Remote Dev_15.0.1.apk}"
 # tool locations (overridable through the environment)
 JAVA="${JAVA:-/tmp/jdk/jdk4py/java-runtime/bin/java}"
 KEYTOOL="${KEYTOOL:-/tmp/jdk/jdk4py/java-runtime/bin/keytool}"
-APKTOOL="${APKTOOL:-/tmp/apktool.jar}"
+APKTOOL="${APKTOOL:-$HERE/tools/apktool.jar}"
 AAPT2="${AAPT2:-/tmp/aa/package/bin/x64/linux/aapt2}"
 D8JAR="${D8JAR:-/tmp/bt/d8.jar}"
-APKSIGNER="${APKSIGNER:-/tmp/bt/apksigner.jar}"
+APKSIGNER="${APKSIGNER:-$HERE/tools/apksigner.jar}"
 ANDROID_JAR="${ANDROID_JAR:-/tmp/android36.jar}"
 SMALI_LIB="${SMALI_LIB:-/tmp/alpk/package/java-binaries}"
 JAVAC_JAR="${JAVAC_JAR:-/tmp/tj/package/tools.jar}"
-KEYSTORE="${KEYSTORE:-/tmp/release.jks}"
+KEYSTORE="${KEYSTORE:-$HERE/tools/release.jks}"
 KS_PASS="${KS_PASS:-mediastar2026}"
 KS_ALIAS="${KS_ALIAS:-mediastar}"
 
@@ -91,15 +91,25 @@ cp "$DEX/out/classes.dex" classes.dex
 if [ -f "$DEC/androidsupportmultidexversion.txt" ]; then
     cp "$DEC/androidsupportmultidexversion.txt" .
 fi
-rm -f "$WORK/unsigned.apk"
-zip -X -r -q -9 "$WORK/unsigned.apk" . -x '.*'
+rm -f "$WORK/unsigned.apk" "$WORK/aligned.apk"
+# -D keeps directory entries out of the zip: apksigner rewrites the archive and
+# would otherwise drop them, shifting every offset and undoing the alignment.
+zip -X -D -r -q -9 "$WORK/unsigned.apk" . -x '.*'
+
+# Android 11+ (targetSdk >= 30) rejects an APK whose resources.arsc is DEFLATE'd
+# or not 4-byte aligned.  zip and apktool both compress it, so fix it here.
+echo "==> aligning (resources.arsc STORED + 4-byte aligned)"
+python3 "$HERE/zipalign.py" "$WORK/unsigned.apk" "$WORK/aligned.apk"
 
 echo "==> signing"
-"$JAVA" -jar "$APKSIGNER" sign \
+"$JAVA" -jar "$APKSIGNER" sign --min-sdk-version 21 \
     --ks "$KEYSTORE" --ks-pass "pass:$KS_PASS" --key-pass "pass:$KS_PASS" \
     --ks-key-alias "$KS_ALIAS" \
     --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled true \
-    --out "$OUT_APK" "$WORK/unsigned.apk" 2>&1 | grep -v 'WARNING' || true
+    --out "$OUT_APK" "$WORK/aligned.apk" 2>&1 | grep -v 'WARNING' || true
+
+echo "==> confirming alignment survived signing"
+python3 "$HERE/verify_apk.py" "$OUT_APK"
 
 echo "==> verifying"
 "$JAVA" -jar "$APKSIGNER" verify --verbose "$OUT_APK" 2>&1 | grep -v WARNING | head -12
