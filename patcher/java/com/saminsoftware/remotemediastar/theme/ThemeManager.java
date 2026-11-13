@@ -1034,6 +1034,38 @@ public final class ThemeManager {
         }
     }
 
+    /**
+     * Wire the "developer page" entry up with a real listener.
+     *
+     * The settings panel is built by _vvvv0 in the generated b4a code, and the
+     * original builders attach their callbacks through
+     * main._v5.RunMethod("&lt;Sub&gt;", ...).  That dispatch resolves the
+     * subroutine name reflectively at runtime, so the build cannot prove the
+     * target exists - and until now the "Developer" entry did exactly that
+     * with a callback that was never reachable, which threw NoSuchMethodError
+     * the moment the settings panel was opened.
+     *
+     * A plain OnClickListener is both verifiable at build time and independent
+     * of b4a's reflective plumbing.
+     */
+    public static void attachDeveloperButton(View button) {
+        if (button == null) {
+            return;
+        }
+        try {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        showDeveloperPage();
+                    } catch (Throwable ignored) {
+                    }
+                }
+            });
+        } catch (Throwable ignored) {
+        }
+    }
+
     public static void openInstagram() {
         openLink(DEV_INSTAGRAM_URL, DEV_INSTAGRAM);
     }

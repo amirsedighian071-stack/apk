@@ -3153,6 +3153,27 @@
     return-void
 .end method
 
+# Direct OnClickListener for the "developer page" entry in the settings panel.
+# The generated b4a code normally attaches callbacks through
+# main._v5.RunMethod("<Sub>", ...), which resolves the name reflectively at
+# runtime - a build cannot prove the target exists, and this button's callback
+# was in fact never reachable.  A plain listener is verifiable and does not
+# depend on b4a's reflective plumbing.
+.method public static attachDeveloperButton(Landroid/view/View;)V
+    .locals 1
+
+    if-eqz p0, :cond_0
+
+    new-instance v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$11;
+
+    invoke-direct {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$11;-><init>()V
+
+    invoke-virtual {p0, v0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
+
+    :cond_0
+    return-void
+.end method
+
 .method public static openInstagram()V
     .locals 2
 

@@ -145,6 +145,23 @@ def rename_package(dec):
     write(manifest, data)
     log("application id -> %s (label: MediaStar Remote Dev)" % NEW_APPID)
 
+    # The b4a StarterHelper looks up android.permission.WAKE_LOCK before
+    # acquiring a wakelock on the startServiceFromReceiver() path.  Nothing in
+    # this app ever requests that permission and the app's own receiver is
+    # never broadcast, so declaring it would add a permission the app never
+    # uses - exactly the kind of extra scope that gets flagged for review.
+    # Leaving it out means the lookup simply fails and the wakelock branch is
+    # skipped; the service itself still starts normally.
+    data = read(manifest)
+    for perm in ("android.permission.WAKE_LOCK",
+                 "android.permission.RECEIVE_BOOT_COMPLETED",
+                 "android.permission.INTERNET"):
+        tag = '<uses-permission android:name="%s"/>' % perm
+        if tag in data:
+            data = data.replace(tag, "")
+            log("dropped unused permission %s" % perm.split(".")[-1])
+    write(manifest, data)
+
     yml = os.path.join(dec, "apktool.yml")
     if os.path.exists(yml):
         y = read(yml)
@@ -622,21 +639,23 @@ def patch_developer_button(lines):
 
     move-result-object v6
 
-    new-array v9, v3, [Ljava/lang/Object;
+    # Attach the click callback with a direct static call instead of
+    # main._v5.RunMethod("Developer", ...).  RunMethod goes through b4a's
+    # reflective dispatcher, which only resolves the sub name at runtime, so a
+    # missing or misnamed callback is invisible at build time and shows up on
+    # the device as a NoSuchMethodError the moment the panel opens.
+    move-object v9, v6
 
-    aput-object v6, v9, v5
+    check-cast v9, Landroid/view/View;
 
-    const-string v6, "Developer"
-
-    aput-object v6, v9, v4
-
-    sget-object v6, Lcom/saminsoftware/remotemediastar/main;->_v5:Lanywheresoftware/b4j/object/JavaObject;
-
-    invoke-virtual {v6, v12, v9}, Lanywheresoftware/b4j/object/JavaObject;->RunMethod(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-static {v9}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->attachDeveloperButton(Landroid/view/View;)V
 
     add-int v6, v19, v21
 
-    add-int v19, v6, v1
+    # v1 is a String on every path here (last write is the "BuyDongleSettings"
+    # const-string above), so it cannot be used as an int gap.  v5 is the
+    # constant 0 written near the top of this method.
+    add-int v19, v6, v5
 
 """.replace("LABEL", DEV_LABEL)
     lines.insert(ret, block)

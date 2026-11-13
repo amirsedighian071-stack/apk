@@ -338,6 +338,36 @@ def analyse(m):
                                      'writes a %s value into a %s slot (register %s holds %s)'
                                      % (have, req, src, have)))
 
+        # arithmetic needs a numeric register.  This is the 15.0.1 build 3
+        # regression: `add-int v19, v6, v1` where v1 was the const-string
+        # "BuyDongleSettings" left over from the statement above.  Assembling
+        # is happy; the verifier rejects the whole class.
+        numeric_check = None
+        REF_TAKING = {'instance-of', 'array-length'}
+        if op not in REF_TAKING and (op in INT_OPS or op in WIDE_OPS
+                                     or op in FLOAT_OPS or op in DOUBLE_OPS):
+            numeric_check = INT if op in INT_OPS else (
+                WIDE if op in WIDE_OPS else (DOUBLE if op in DOUBLE_OPS else FLOAT))
+        if numeric_check:
+            # operand 0 is the destination, only the sources must be numeric
+            operands = [t.strip() for t in rest.split(',')][1:]
+            for tok in operands:
+                r_ = re.match(r'^(v\d+|p\d+)', tok)
+                if not r_:
+                    continue
+                have = cur[idx(r_.group(1))]
+                if have in (UNKNOWN, CONFLICT, ZERO):
+                    continue
+                allowed = {INT, FLOAT}
+                if numeric_check == WIDE:
+                    allowed = {WIDE, DOUBLE}
+                elif numeric_check == DOUBLE:
+                    allowed = {DOUBLE, WIDE}
+                if have == OBJ or have not in allowed:
+                    problems.append((m['nums'][i], s,
+                                     'arithmetic on a %s register %s' % (have, r_.group(1))))
+                    break
+
         if op.startswith('invoke'):
             sig_str = rest.split('->')[-1] if '->' in rest else ''
             want = parse_params(sig_str)
@@ -434,6 +464,106 @@ def scan(root, verbose=False):
     return total_methods, findings
 
 
+# ---------------------------------------------------------------------------
+def verify_xrefs(root):
+    """Every `invoke-*` / field access into a class defined in this DEX must
+    name a member that actually exists.
+
+    This is the check that was missing for three builds in a row.  A call to a
+    method that does not exist on a class we ship is not caught by the smali
+    assembler, by `apktool b`, by androguard, or by the type checker: the
+    instructions are individually valid.  It only fails on a device, at the
+    moment the call is reached, with NoSuchMethodError.
+
+    Members of platform / library classes cannot be checked here, only classes
+    defined in this tree.
+    """
+    import glob
+    meth = {}
+    fld = {}
+    supers = {}
+    for sd in SMALI_DIRS:
+        base = os.path.join(root, sd)
+        if not os.path.isdir(base):
+            continue
+        for path in glob.glob(os.path.join(base, '**', '*.smali'), recursive=True):
+            cls = None
+            for raw in open(path, encoding='utf-8', errors='replace'):
+                line = raw.strip()
+                if line.startswith('.class'):
+                    cls = line.split()[-1]
+                    meth.setdefault(cls, set())
+                    fld.setdefault(cls, set())
+                elif cls and line.startswith('.super'):
+                    supers[cls] = line.split()[-1]
+                elif cls and line.startswith('.method'):
+                    sig = line.split(None, 1)[-1]
+                    # strip modifiers: last token pair is name(params)ret
+                    head = sig
+                    name = head.split('(')[0].split()[-1]
+                    desc = '(' + head.split('(', 1)[1] if '(' in head else '()V'
+                    meth[cls].add((name, desc))
+                elif cls and line.startswith('.field'):
+                    parts = line.split()
+                    for tok in parts:
+                        if ':' in tok:
+                            n, d = tok.split(':', 1)
+                            fld[cls].add((n, d))
+                            break
+
+    def has_member(cls, key, table):
+        """Walk the superclass chain within the classes we ship.  A member
+        inherited from a parent we also define is legal; one inherited from a
+        platform class cannot be checked and is assumed to exist."""
+        seen = set()
+        cur = cls
+        while cur and cur in table and cur not in seen:
+            seen.add(cur)
+            if key in table[cur]:
+                return True
+            cur = supers.get(cur)
+        return cur is not None and cur not in supers and cur not in table
+
+    problems = []
+    member_ref = re.compile(r'(L[^;]+;)->([\w$<>]+)(\([^)]*\)\S*)')
+    field_ref = re.compile(r'(L[^;]+;)->([\w$]+) (\S+)$')
+    for sd in SMALI_DIRS:
+        base = os.path.join(root, sd)
+        if not os.path.isdir(base):
+            continue
+        for path in glob.glob(os.path.join(base, '**', '*.smali'), recursive=True):
+            rel = os.path.relpath(path, root)
+            for n, raw in enumerate(open(path, encoding='utf-8', errors='replace'), 1):
+                line = raw.strip()
+                if line.startswith(('.', '#')):
+                    continue
+                if line.startswith('invoke'):
+                    m = member_ref.search(line)
+                    if not m:
+                        continue
+                    owner, name, desc = m.groups()
+                    if owner not in meth:
+                        continue
+                    if not has_member(owner, (name, desc), meth):
+                        problems.append((rel, n, line,
+                                         '%s->%s%s does not exist' % (owner, name, desc)))
+                elif line.split(' ')[0] in ('sget', 'sput', 'sget-object', 'sput-object',
+                                            'sget-boolean', 'sput-boolean', 'sget-wide',
+                                            'sput-wide', 'iget', 'iput', 'iget-object',
+                                            'iput-object', 'iget-boolean', 'iput-boolean',
+                                            'iget-wide', 'iput-wide'):
+                    m = field_ref.search(line)
+                    if not m:
+                        continue
+                    owner, name, desc = m.groups()
+                    if owner not in fld:
+                        continue
+                    if not has_member(owner, (name, desc), fld):
+                        problems.append((rel, n, line,
+                                         '%s->%s:%s does not exist' % (owner, name, desc)))
+    return problems
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('-')]
     verbose = '--verbose' in sys.argv
@@ -448,8 +578,23 @@ def main():
         print('\nFAILED: %d type violation(s) - Android would reject these classes' % len(findings))
         return 1
     print('OK: no type violations')
+
+    xref = verify_xrefs(args[0])
+    print('== cross-reference check')
+    for rel, num, line, why in xref:
+        print('%s:%d: %s' % (rel, num, line))
+        print('    %s' % why)
+    if xref:
+        print('\nFAILED: %d unresolvable member reference(s) - NoSuchMethodError/NoSuchFieldError on device'
+              % len(xref))
+        return 1
+    print('OK: every call into a class we ship resolves')
     return 0
 
 
 if __name__ == '__main__':
     sys.exit(main())
+
+
+# ---------------------------------------------------------------------------
+# cross-reference check: every call into a class we ship must resolve
