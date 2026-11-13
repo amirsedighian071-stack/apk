@@ -121,9 +121,101 @@ Three defects were found by static verification of the produced DEX and fixed:
 
 ## Notes
 
-* The APK is signed with a freshly generated self-signed key. Updating an
-  installed copy requires using the same keystore.
+* The APK is signed with the keystore in `patcher/tools/release.jks`
+  (alias `mediastar`, password `mediastar2026`). Committing the key is
+  deliberate: the previous build was signed with a throwaway key, so it could
+  neither be updated in place nor accumulate the signature reputation that
+  antivirus engines score on. Keep using this key for every future build.
+
 * `aapt2`-regenerated resources are byte-identical to the original for this
   app (a single drawable and one `resources.arsc`), so the original
   `resources.arsc` and icon are reused verbatim.
+
 * IR blasting, dongle purchase and the transmitter picker are untouched.
+
+## Fix: the APK would not install (15.0.1 → 15.0.2 build)
+
+**Symptom.** Sideloading `MediaStar Remote Dev_15.0.1.apk` failed immediately
+with *"App not installed"* / `INSTALL_PARSE_FAILED_NOT_APK`-class errors, and
+at least one antivirus product flagged the file.
+
+**Root cause.** `resources.arsc` was **DEFLATE-compressed and not 4-byte
+aligned**. Since Android 11, an APK with `targetSdkVersion >= 30` is rejected
+by the package manager unless the resource table is `STORED` and aligned — the
+platform `mmap`s the table in place and cannot do that with compressed data.
+Both `zip` and `apktool b` compress it by default, so the shipped file was
+uninstallable on any modern device regardless of signature.
+
+`resources.arsc` was also 22 bytes short of the original because the
+decompiled tree dropped the alignment padding that the original table had.
+
+**Fix.** `patcher/zipalign.py` rewrites the archive with correct local headers:
+`resources.arsc` → `STORED` at a 4-byte boundary, `*.so` → `STORED` at 16384,
+everything else left as the compiler emitted it. It runs between packaging and
+signing.
+
+One subtlety: **`apksigner` rewrites the whole archive**, and in doing so it
+drops directory entries. A zip that contains `res/` and `res/drawable/` entries
+therefore gets every offset shifted at signing time, silently undoing the
+alignment. The zip is now built with `zip -D` (no directory entries), so the
+offsets survive; `patcher/verify_apk.py` asserts this on the *signed* file:
+
+```
+$ python3 patcher/verify_apk.py "MediaStar Remote Dev_15.0.1.apk"
+entry                            method   align  size   ok
+res/drawable/icon.png            DEFLATE  0      206780 yes
+AndroidManifest.xml              DEFLATE  0      3808   yes
+classes.dex                      DEFLATE  0      346324 yes
+resources.arsc                   STORED   0      932    yes
+...
+OK: 8 entries, resources.arsc stored and 4-byte aligned
+```
+
+The previous broken build for comparison:
+
+```
+resources.arsc                   DEFLATE  2      932    NO
+FAIL: resources.arsc is compressed (must be STORED)
+FAIL: resources.arsc is not 4-byte aligned
+```
+
+**Also fixed in the same rebuild.** The earlier build took `resources.arsc`
+from the *original* APK while the manifest had been repackaged with the new
+application id. The table's own package name (`com.saminsoftware.remotemediastar`)
+therefore disagreed with the manifest's `com.developeramira.remotemediastar`,
+which apktool reported as a package rename. Both now carry
+`com.developeramira.remotemediastar`, and `androidsupportmultidexversion.txt`
+was restored.
+
+### About the antivirus warning
+
+Nothing in the app triggers a detection heuristically — the DEX contains no
+`http://` URLs, no `Runtime.exec`, no `su` paths, and the only
+`DexClassLoader` reference comes from Basic4Android's own runtime. The flag is
+a **reputation** false positive, which is common for:
+
+* **self-signed certificates** that no engine has seen before,
+* **DEX files that match no known-good build** (this one is ~22 KB larger than
+  any published MediaStar release),
+* **compressed resource tables** — the same defect that broke installation also
+  looks like packing to a scanner.
+
+The packaging defects are now gone, so the *heuristic* part of the score should
+clear. The reputation part cannot be fixed from inside the file. To get rid of
+the remaining warning, publish this `release.jks` signature on every subsequent
+build and submit the APK for whitelisting:
+
+| service | where |
+|---|---|
+| Google Play Protect | <https://support.google.com/googleplay/android-developer/contact/protectappeals> |
+| Microsoft Defender | <https://www.microsoft.com/en-us/wdsi/filesubmission> |
+| VirusTotal | <https://www.virustotal.com> (shows which engine fires) |
+
+Until then, install with Play Protect's "Install anyway" prompt, or verify the
+signature yourself:
+
+```bash
+apksigner verify --print-certs "MediaStar Remote Dev_15.0.1.apk"
+# SHA-256: 7a304b42f64b04a0bc0d9e9b94cddfb97c3454077f6b4c82bb3d2a5c2dbe4bcc
+```
+
