@@ -1,0 +1,6 @@
+# build scratch / toolchain downloads
+build/
+tools/*.jar
+*.idsig
+*.jks
+*.keystore
