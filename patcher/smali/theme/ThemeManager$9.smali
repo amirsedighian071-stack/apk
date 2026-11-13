@@ -1,4 +1,4 @@
-.class final Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9;
+.class final Lcom/developeramira/remotemediastar/theme/ThemeManager$9;
 .super Ljava/lang/Object;
 .source "ThemeManager.java"
 
@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->themeCard(Landroid/app/Activity;IZ)Landroid/view/View;
+    value = Lcom/developeramira/remotemediastar/theme/ThemeManager;->themeCard(Landroid/app/Activity;IZ)Landroid/view/View;
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -26,7 +26,7 @@
     .locals 0
 
     .line 1234
-    iput p1, p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9;->val$index:I
+    iput p1, p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$9;->val$index:I
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -39,19 +39,19 @@
     .locals 3
 
     .line 1237
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_IDS:[Ljava/lang/String;
 
-    iget v1, p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9;->val$index:I
+    iget v1, p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$9;->val$index:I
 
     aget-object v0, v0, v1
 
-    invoke-static {v0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->setTheme(Ljava/lang/String;)V
+    invoke-static {v0}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->setTheme(Ljava/lang/String;)V
 
     .line 1238
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->syncLegacyFlag()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->syncLegacyFlag()V
 
     .line 1239
-    invoke-static {p1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->pulse(Landroid/view/View;)V
+    invoke-static {p1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->pulse(Landroid/view/View;)V
 
     .line 1240
     new-instance p1, Ljava/lang/StringBuilder;
@@ -64,9 +64,9 @@
 
     move-result-object p1
 
-    sget-object v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
+    sget-object v0, Lcom/developeramira/remotemediastar/theme/ThemeManager;->THEME_NAMES:[Ljava/lang/String;
 
-    iget v1, p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9;->val$index:I
+    iget v1, p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$9;->val$index:I
 
     aget-object v0, v0, v1
 
@@ -84,19 +84,19 @@
 
     move-result-object p1
 
-    invoke-static {p1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
+    invoke-static {p1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->toast(Ljava/lang/String;)V
 
     .line 1242
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->hideThemeChooser()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->hideThemeChooser()V
 
     .line 1243
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->access$100()Landroid/os/Handler;
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->access$100()Landroid/os/Handler;
 
     move-result-object p1
 
-    new-instance v0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9$1;
+    new-instance v0, Lcom/developeramira/remotemediastar/theme/ThemeManager$9$1;
 
-    invoke-direct {v0, p0}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9$1;-><init>(Lcom/saminsoftware/remotemediastar/theme/ThemeManager$9;)V
+    invoke-direct {v0, p0}, Lcom/developeramira/remotemediastar/theme/ThemeManager$9$1;-><init>(Lcom/developeramira/remotemediastar/theme/ThemeManager$9;)V
 
     const-wide/16 v1, 0xb4
 

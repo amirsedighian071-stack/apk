@@ -41,7 +41,9 @@ KS_PASS = os.environ.get("KS_PASS", "mediastar2026")
 KS_ALIAS = os.environ.get("KS_ALIAS", "mediastar")
 WORK = os.environ.get("WORK", os.path.join(ROOT, "build"))
 
-TM_DIR = "com/saminsoftware/remotemediastar/theme"
+# the theme engine lives under the *new* application id, because B4A
+# resolves components from the manifest package
+TM_DIR = "com/developeramira/remotemediastar/theme"
 
 
 def run(cmd, **kw):
@@ -86,23 +88,26 @@ def main():
     shutil.rmtree(dest, ignore_errors=True)
     shutil.copytree(os.path.join(HERE, "smali", "theme"), dest)
 
-    stage(4, "control-flow check")
+    stage(4, "application-id consistency")
+    run([sys.executable, os.path.join(HERE, "normalize_pkg.py"), dec])
+
+    stage(5, "control-flow check")
     run([sys.executable, os.path.join(HERE, "verify_smali.py"), dec])
 
-    stage(5, "Dalvik type check")
+    stage(6, "Dalvik type check")
     run([sys.executable, os.path.join(HERE, "verify_types.py"), dec])
 
-    stage(6, "assemble with apktool")
+    stage(7, "assemble with apktool")
     rebuilt = os.path.join(WORK, "rebuilt.apk")
     if os.path.exists(rebuilt):
         os.remove(rebuilt)
     run([JAVA, "-jar", APKTOOL, "b", dec, "-o", rebuilt], stdout=subprocess.DEVNULL)
 
-    stage(7, "align")
+    stage(8, "align")
     aligned = os.path.join(WORK, "aligned.apk")
     run([sys.executable, os.path.join(HERE, "zipalign.py"), rebuilt, aligned])
 
-    stage(8, "sign")
+    stage(9, "sign")
     if os.path.exists(args.out):
         os.remove(args.out)
     run([JAVA, "-jar", APKSIGNER, "sign", "--min-sdk-version", "21",
@@ -112,10 +117,10 @@ def main():
          "--v3-signing-enabled", "true", "--out", args.out, aligned],
         stderr=subprocess.DEVNULL)
 
-    stage(9, "verify the signed archive")
+    stage(10, "verify the signed archive")
     run([sys.executable, os.path.join(HERE, "verify_apk.py"), args.out])
 
-    stage(10, "verify signature")
+    stage(11, "verify signature")
     run([JAVA, "-jar", APKSIGNER, "verify", "--print-certs", args.out])
 
     # final sanity: the DEX that went in is byte-identical to the one in the zip

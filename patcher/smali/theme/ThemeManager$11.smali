@@ -1,4 +1,4 @@
-.class Lcom/saminsoftware/remotemediastar/theme/ThemeManager$11;
+.class Lcom/developeramira/remotemediastar/theme/ThemeManager$11;
 .super Ljava/lang/Object;
 .source "ThemeManager.java"
 
@@ -21,7 +21,7 @@
     .locals 0
 
     :try_start_0
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->showDeveloperPage()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->showDeveloperPage()V
     :try_end_0
     .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
 

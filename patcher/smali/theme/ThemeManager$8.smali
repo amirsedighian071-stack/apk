@@ -1,4 +1,4 @@
-.class final Lcom/saminsoftware/remotemediastar/theme/ThemeManager$8;
+.class final Lcom/developeramira/remotemediastar/theme/ThemeManager$8;
 .super Ljava/lang/Object;
 .source "ThemeManager.java"
 
@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->buildThemeOverlay(Landroid/app/Activity;)Landroid/widget/FrameLayout;
+    value = Lcom/developeramira/remotemediastar/theme/ThemeManager;->buildThemeOverlay(Landroid/app/Activity;)Landroid/widget/FrameLayout;
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -33,10 +33,10 @@
     .locals 0
 
     .line 1162
-    invoke-static {p1}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->pulse(Landroid/view/View;)V
+    invoke-static {p1}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->pulse(Landroid/view/View;)V
 
     .line 1163
-    invoke-static {}, Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->hideThemeChooser()V
+    invoke-static {}, Lcom/developeramira/remotemediastar/theme/ThemeManager;->hideThemeChooser()V
 
     .line 1164
     return-void

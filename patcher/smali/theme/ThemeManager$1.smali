@@ -1,4 +1,4 @@
-.class final Lcom/saminsoftware/remotemediastar/theme/ThemeManager$1;
+.class final Lcom/developeramira/remotemediastar/theme/ThemeManager$1;
 .super Ljava/lang/Object;
 .source "ThemeManager.java"
 
@@ -8,7 +8,7 @@
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lcom/saminsoftware/remotemediastar/theme/ThemeManager;->hideSettingsPanel()V
+    value = Lcom/developeramira/remotemediastar/theme/ThemeManager;->hideSettingsPanel()V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -26,7 +26,7 @@
     .locals 0
 
     .line 514
-    iput-object p1, p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$1;->val$panel:Lanywheresoftware/b4a/objects/PanelWrapper;
+    iput-object p1, p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$1;->val$panel:Lanywheresoftware/b4a/objects/PanelWrapper;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -40,7 +40,7 @@
 
     .line 518
     :try_start_0
-    iget-object v0, p0, Lcom/saminsoftware/remotemediastar/theme/ThemeManager$1;->val$panel:Lanywheresoftware/b4a/objects/PanelWrapper;
+    iget-object v0, p0, Lcom/developeramira/remotemediastar/theme/ThemeManager$1;->val$panel:Lanywheresoftware/b4a/objects/PanelWrapper;
 
     invoke-virtual {v0}, Lanywheresoftware/b4a/objects/PanelWrapper;->RemoveView()V
     :try_end_0
