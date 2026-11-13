@@ -187,6 +187,98 @@ which apktool reported as a package rename. Both now carry
 `com.developeramira.remotemediastar`, and `androidsupportmultidexversion.txt`
 was restored.
 
+## Fix: the app still closed on launch (15.0.1 build 3)
+
+**Symptom.** Build 2 installed and no longer failed verification on the boot
+path, but the app still reported "keeps stopping".
+
+**Two independent defects, both invisible to every earlier check.**
+
+### 1. Arithmetic on a String register
+
+The patched block that appends the developer entry to the settings panel ended
+with
+
+```
+add-int v6, v19, v21
+add-int v19, v6, v1
+```
+
+`v1` was assumed to still hold the original gap constant. It does not: the
+statement immediately above is `const-string v1, "BuyDongleSettings"`, so on
+every path reaching that instruction `v1` holds a **String**. The command was
+in fact `Settings.brand`-style padding using a literal that had already been
+clobbered. Assembling is fine; the verifier rejects the whole class.
+
+Fixed to `add-int v19, v6, v5` — `v5` is the constant `0` written near the top
+of `_vvvv0`.
+
+### 2. A call to a method that does not exist
+
+The developer button was wired with
+
+```
+invoke-static {v9}, ThemeManager->attachDeveloperButton(Landroid/view/View;)V
+```
+
+but `attachDeveloperButton` **did not exist** in `ThemeManager`. The build is
+happy because the string is only a reference; Android resolves it on first
+execution and throws `NoSuchMethodError`, which is exactly the "opens the
+settings panel, app dies" symptom.
+
+This is the deeper lesson: the patch called into the engine through
+`ThemeManager` in three builds without ever checking that the target member
+exists. Fixed by adding the method and its listener class
+(`ThemeManager$11`) to `patcher/smali/theme/`, and by adding the gate below so
+it cannot happen again.
+
+The button also no longer relies on b4a's reflective
+`main._v5.RunMethod("Developer", ...)` dispatch — that resolves the subroutine
+name only at runtime, so a missing or misnamed callback there is equally
+invisible at build time. A plain `OnClickListener` is used instead.
+
+## New gate: cross-reference resolution
+
+`patcher/verify_types.py` now also checks that **every `invoke-*` and field
+access into a class defined in this tree names a member that actually exists**,
+walking the superclass chain for inherited members so that legitimate
+inheritance (`BALayout` overriding `ViewGroup`) is not flagged, and skipping
+platform classes that cannot be inspected.
+
+```
+$ python3 patcher/verify_types.py build/dec
+== type check: 1631 methods
+OK: no type violations
+== cross-reference check
+OK: every call into a class we ship resolves
+```
+
+Calibrated in both directions: run against the previously shipped APK it
+reports the defect immediately.
+
+```
+$ python3 patcher/verify_types.py /tmp/previous-build
+main.smali:10891: add-int v19, v6, v1
+    arithmetic on a obj register v1
+FAILED: 1 type violation(s) - Android would reject these classes
+```
+
+## Permissions
+
+`android.permission.WAKE_LOCK` is referenced only by b4a's
+`StarterHelper.startServiceFromReceiver()`, which the app never reaches — the
+`starter_BR` receiver has no intent filter and is never broadcast. It is not
+declared, so that code path simply skips the wakelock branch. The declared set
+stays at the two permissions the app genuinely uses:
+
+| permission | why |
+|---|---|
+| `TRANSMIT_IR` | the app is an IR remote |
+| `FOREGROUND_SERVICE` | the `starter` service |
+
+`patch.py` now actively strips `WAKE_LOCK`, `INTERNET` and
+`RECEIVE_BOOT_COMPLETED` if a future apktool version reintroduces them.
+
 ## Fix: the app closed immediately on launch (15.0.1 build 2)
 
 **Symptom.** After the alignment fix the APK installed fine, but tapping the
